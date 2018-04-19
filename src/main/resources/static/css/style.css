@@ -1,0 +1,9 @@
+.media{
+	margin:0;
+	border:1px solid lightgrey;
+}
+
+.media-left{
+	margin-right:20px;
+}
+
