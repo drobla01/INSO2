@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
 import com.moviecatalog.demo.Results;
+import com.moviecatalog.model.Movie;
 
 @Controller
 

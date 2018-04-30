@@ -1,4 +1,4 @@
-package com.moviecatalog.demo;
+package com.moviecatalog.model;
 
 import java.util.Date;
 import java.util.List;
@@ -17,7 +17,6 @@ public class Movie {
 	private Date release_date;
 	private String type;
 	private String id;
-	
 
 	public String getId() {
 		return id;

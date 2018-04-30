@@ -2,7 +2,7 @@ package com.moviecatalog.demo;
 
 import java.util.List;
 
-import com.moviecatalog.demo.Movie;
+import com.moviecatalog.model.Movie;
 
 public class Results {
 
