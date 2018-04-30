@@ -20,8 +20,14 @@
 <!-- Custom styles for this template -->
 <link th:href="@{/css/index.css}" rel="stylesheet">
 
-<link href="https://fonts.googleapis.com/css?family=Open+Sans"
+<link
+	href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat|Raleway|Work+Sans"
 	rel="stylesheet">
+
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.0.10/css/all.css"
+	integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg"
+	crossorigin="anonymous">
 
 </head>
 
@@ -30,11 +36,12 @@
 	<!-- Navigation -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<div class="container">
-			<a class="navbar-brand" href="#">Start Bootstrap</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
-				data-target="#navbarResponsive" aria-controls="navbarResponsive"
-				aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
+			<a class="navbar-brand" href="/">Start Bootstrap</a>
+			<button class="custom-toggler navbar-toggler" type="button"
+				data-toggle="collapse" data-target="#navbarResponsive"
+				aria-controls="navbarResponsive" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"> </span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
@@ -61,13 +68,15 @@
 			<div class="col-lg-3 col-md-4 col-sm-6 portfolio-item grow"
 				th:each="movie:${movies}">
 				<div class="border border-0">
-					<a href="movie"><img class="card-img-top round sombra"
-						th:src="@{https://image.tmdb.org/t/p/w500} + ${movie.poster_path}"
+					<a th:href="'movie?id=' + ${movie.id}"><img
+						class="card-img-top round sombra"
+						th:src="@{https://image.tmdb.org/t/p/w342} + ${movie.poster_path}"
 						alt=""></a>
-					<p class="text-white score shadow">8</p>
+					<p class="text-white score shadow" th:text="${movie.vote_average}"></p>
 				</div>
 				<p class="mt-2">
-					<a class="text-white" href="#" th:text="${movie.title}"></a>
+					<a class="text-white" th:href="'movie?id=' + ${movie.id}"
+						th:text="${movie.title}"></a>
 				</p>
 			</div>
 		</div>

@@ -10,6 +10,11 @@ body {
 	}
 }
 
+.navbar{
+	
+	font-family: Montserrat;
+	font-weigth: normal;
+}
 .portfolio-item {
 	margin-bottom: 30px;
 }
@@ -19,11 +24,11 @@ body {
 }
 
 .round {
-	border-radius:10px;
+	border-radius: 10px;
 }
 
 .sombra {
-	box-shadow: 0px 0px 29px 1px rgba(0,0,0,0.64);
+	box-shadow: 0px 0px 29px 1px rgba(0, 0, 0, 0.64);
 }
 
 .transition {
@@ -38,18 +43,29 @@ body {
 	transition: all .2s ease-in-out;
 }
 
-.grow:hover {
-	transform: scale(1.03);
+@media not all and (pointer: coarse) {
+	.grow:hover {
+		transform: scale(1.03);
+	}
 }
 
 .score {
-	height: 35px;
-	width: 35px;
+	height: 39px;
+	width: 39px;
 	background-color: #F18A02;
 	border-radius: 50%;
 	text-align: center;
-	padding: 5px;
+	padding: 7px;
 	position: absolute;
 	left: 88%;
-	top: 77%;
+	top: 76%;
 }
+/*
+.custom-toggler.navbar-toggler {
+    border-color: rgb(255,102,203);
+}
+
+.custom-toggler .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,102,203, 0.7)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+*/

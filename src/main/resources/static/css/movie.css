@@ -1,101 +1,170 @@
 body {
-	font-family: Open Sans;
+	font-family: Montserrat;
+	padding-top: 105px;
+	overflow-x: hidden;
 }
 
-.no-padding{
-	padding:0;
+.no-padding {
+	padding: 0;
 }
 
-.modal{
-	margin-top:200px;
+.modal {
+	padding-top: 200px;
 }
 
 .modal-backdrop.in {
-    filter: alpha(opacity=7);
-    opacity: 0.7;
-}
- 
-.modal-content {
-    background: none;
-    border: 0;
-    -moz-border-radius: 0; -webkit-border-radius: 0; border-radius: 0;
-    -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none;
-}
- 
-.modal-body {
-    padding: 0 25px 25px 25px;
-}
- 
-.modal-header {
-    padding: 25px 25px 15px 25px;
-    text-align: right;
-}
- 
-.modal-header, .modal-footer {
-    border: 0;
-}
- 
-.modal-header .close {
-    float: none;
-    margin: 0;
-    font-size: 36px;
-    color: #fff;
-    font-weight: 300;
-    text-shadow: none;
-    opacity: 1;
+	filter: alpha(opacity = 7);
+	opacity: 0.7;
 }
 
-.video-link {
-    padding-top: 70px;
+.modal-content {
+	background: none;
+	border: 0;
+	-moz-border-radius: 0;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
 }
- 
-.video-link a:hover,
-.video-link a:focus {
-    outline: 0;
+
+.modal-body {
+	padding: 0 25px 25px 25px;
 }
- 
-a .video-link-text {
-    color: #fff;
-    opacity: 0.8;
-    -o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; -ms-transition: all .3s; transition: all .3s;
+
+.modal-header {
+	padding: 25px 25px 15px 25px;
+	text-align: right;
 }
- 
-a:hover .video-link-text, 
-a:focus .video-link-text {
-    outline: 0;
-    color: #fff;
-    opacity: 1;
-    border-bottom: 1px dotted #fff;
+
+.modal-header, .modal-footer {
+	border: 0;
 }
- 
-a .video-link-icon {
-    position: relative;
-    display: inline-block;
-    width: 50px;
-    height: 50px;
-    margin-right: 10px;
-    background: #e89a3e;
-    color: #fff;
-    line-height: 50px;
-    -moz-border-radius: 50%; -webkit-border-radius: 50%; border-radius: 50%;
-    -o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; -ms-transition: all .3s; transition: all .3s;
+
+.modal-header .close {
+	float: none;
+	margin-top: -11%;
+	font-size: 58px;
+	color: #fff;
+	font-weight: 300;
+	text-shadow: none;
+	opacity: 1;
+	margin-left: 103%;
 }
-a .video-link-icon:after {
-    position: absolute;
-    content: "";
-    top: -6px;
-    left: -6px;
-    width: 66px;
-    height: 66px;
-    background: #444;
-    background: rgba(0, 0, 0, 0.1);
-    z-index: -99;
-    -moz-border-radius: 50%; -webkit-border-radius: 50%; border-radius: 50%;
+
+@
+keyframes spin {to { transform:rotate(360deg);
+	
 }
- 
-a:hover .video-link-icon,
-a:focus .video-link-icon {
-    outline: 0;
-    background: #fff;
-    color: #e89a3e;
+
+}
+.stroke-solid {
+	stroke-dashoffset: 0;
+	stroke-dashArray: 300;
+	stroke-width: 4px;
+	transition: stroke-dashoffset 1s ease, opacity 1s ease;
+}
+
+.icon {
+	transform: scale(0.8);
+	transform-origin: 50% 50%;
+	transition: transform 200ms ease-out;
+}
+
+#play:hover .stroke-solid {
+	opacity: 1;
+	stroke-dashoffset: 300;
+}
+
+#play:hover .icon {
+	transform: scale(0.9);
+}
+
+#play {
+	cursor: pointer;
+	margin: auto 16%;
+}
+
+@media ( min-width : 768px) {
+	#play {
+		cursor: pointer;
+		margin: auto 32%;
+	}
+}
+
+.full-width-image {
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 5%;
+	bottom: 0;
+	background-repeat: no-repeat !important;
+	background-position: center top !important;
+	z-index: -1;
+	background-size: cover;
+	-webkit-box-shadow: inset 0px 0px 135px 20px rgba(0, 0, 0, 0.81);
+	-moz-box-shadow: inset 0px 0px 135px 20px rgba(0, 0, 0, 0.81);
+	box-shadow: inset 0px 0px 135px 20px rgba(0, 0, 0, 0.81);
+}
+
+.fondo {
+	margin-top: 90px;
+	background: rgba(0, 0, 0, 0.6);
+	border-radius: 20px;
+}
+
+.text-score {
+	color: white;
+	font-weight: bold;
+	font-size: 1.2em;
+	font-family: Segoe UI;
+}
+
+.score-bg {
+	background-color: #FA0E76;
+	height: 32px;
+	border-radius: 9px;
+	margin: 20% 0;
+	width: 82px;
+	text-align: center;
+}
+/* 
+Extra small devices (portrait phones, less than 544px) 
+No media query since this is the default in Bootstrap because it is "mobile first"
+*/
+h1 {
+	font-size: 2.5rem;
+} /*1rem = 16px*/
+*
+/
+/* Small devices (landscape phones, 544px and up) */
+
+
+
+
+@media ( min-width : 544px) {
+	h1 {
+		font-size: 2rem;
+	} /*1rem = 16px*/
+}
+
+/* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+@media ( min-width : 768px) {
+	h1 {
+		font-size: 2.5rem;
+	} /*1rem = 16px*/
+}
+
+/* Large devices (desktops, 992px and up) */
+@media ( min-width : 992px) {
+	h1 {
+		font-size: 3rem;
+	} /*1rem = 16px*/
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media ( min-width : 1200px) {
+	h1 {
+		font-size: 5rem;
+	} /*1rem = 16px*/
 }

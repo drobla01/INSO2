@@ -21,7 +21,8 @@
 <link th:href="@{/css/movie.css}" rel="stylesheet">
 <link th:href="@{/css/modal-video.min.css}" rel="stylesheet">
 
-<link href="https://fonts.googleapis.com/css?family=Open+Sans"
+<link
+	href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat|Raleway|Work+Sans"
 	rel="stylesheet">
 
 </head>
@@ -31,11 +32,12 @@
 	<!-- Navigation -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<div class="container">
-			<a class="navbar-brand" href="#">Start Bootstrap</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
+			<a class="navbar-brand" href="/">Start Bootstrap</a>
+			<button class="custom-toggler navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarResponsive" aria-controls="navbarResponsive"
 				aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
+				<span class="navbar-toggler-icon">
+				</span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
@@ -53,6 +55,52 @@
 	</nav>
 
 
+	<div class="full-width-image"
+		th:style="'background-image: url(' + @{https://image.tmdb.org/t/p/original} + ${movie.backdrop_path} + ');'"></div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col" align="center">
+				<h1 class="text-white font-weight-bold mb-4"
+					th:text="${movie.title}"></h1>
+			</div>
+		</div>
+	</div>
+
+	<div class="container mx-auto m-4">
+		<div class="row">
+			<div class="col-lg-2 col-md-2 col-sm-2 col-3">
+				<div class="score-bg">
+					<span class="text-score" th:text="${movie.vote_average}+'&nbsp;'"></span><span
+						class="text-white font-weight-bold mx-auto">/ &nbsp;10</span>
+				</div>
+
+			</div>
+			<div class="col-lg-10 col-md-10 col-sm-10 col-8">
+				<svg class="launch-modal" data-modal-id="modal-video" version="1.1"
+					id="play" xmlns="http://www.w3.org/2000/svg"
+					xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+					height="100px" width="100px" viewBox="0 0 100 100"
+					enable-background="new 0 0 100 100" xml:space="preserve">
+  <path class="stroke-solid" fill="none" stroke="#ffffff"
+						d="M49.9,2.5C23.6,2.8,2.1,24.4,2.5,50.4C2.9,76.5,24.7,98,50.3,97.5c26.4-0.6,47.4-21.8,47.2-47.7
+    C97.3,23.7,75.7,2.3,49.9,2.5" />
+  <path class="icon" fill="#ffffff"
+						d="M38,69c-1,0.5-1.8,0-1.8-1.1V32.1c0-1.1,0.8-1.6,1.8-1.1l34,18c1,0.5,1,1.4,0,1.9L38,69z" />
+</svg>
+			</div>
+		</div>
+	</div>
+
+	<div class="container fondo">
+		<div class="row">
+			<div class="col">
+				<p class="text-white font-weight-bold p-4 mx-auto"
+					th:text="${movie.overview}"></p>
+			</div>
+		</div>
+	</div>
+
 
 	<!-- MODAL -->
 	<div class="modal fade" id="modal-video" tabindex="-1" role="dialog"
@@ -69,24 +117,17 @@
 					<div class="modal-video">
 						<div class="embed-responsive embed-responsive-16by9">
 							<iframe class="embed-responsive-item"
-								src="https://www.youtube.com/embed/F-eMt3SrfFU"
-								 mozallowfullscreen allowfullscreen></iframe>
+								th:src="@{https://www.youtube.com/embed/} + ${trailer.key} + @{?enablejsapi=1}"
+								mozallowfullscreen allowfullscreen></iframe>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	
 
-	<div class="row">
-		<div class="col-sm-8 col-sm-offset-2 video-link medium-paragraph">
-			<a href="#" class="launch-modal" data-modal-id="modal-video"> <span
-				class="video-link-icon"><i class="fa fa-play"></i></span> <span
-				class="video-link-text">Launch modal video</span>
-			</a>
-		</div>
-	</div>
+
+
 
 	<!-- Bootstrap core JavaScript -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
