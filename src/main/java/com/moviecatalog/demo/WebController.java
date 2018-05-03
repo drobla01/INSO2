@@ -26,6 +26,17 @@ public class WebController {
 		model.addAttribute("movies", response.getResults());
 		return "index";
 	}
+	
+	@GetMapping("/social")
+	public String goToProfile(Model model) {
+		RestTemplate restTemplate = new RestTemplate();
+		Results response = restTemplate.getForObject(
+				"https://api.themoviedb.org/3/discover/movie?api_key=9ae4cb8d6fe7e69356db23d14dd945dd&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1",
+				Results.class);
+		model.addAttribute("movies", response.getResults());
+		
+		return "social";
+	}
 
 	@GetMapping("/movie")
 	public String renderImage(@RequestParam(name = "id", required = true) String id, Model model) {
