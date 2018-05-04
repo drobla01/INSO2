@@ -1,0 +1,21 @@
+.perfil-img{
+	width: 200px;
+	height: 150px;
+}
+
+.carousel-control-next, .carousel-control-prev{
+	top:280px;
+}
+
+.carousel-control-next {
+    right: 300px;
+}
+
+.carousel-control-prev {
+    left: 300px;
+}
+
+.carousel-control-next-icon, .carousel-control-prev-icon {
+	width:35px;
+	height: 35px;
+}
