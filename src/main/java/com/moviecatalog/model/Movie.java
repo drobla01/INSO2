@@ -1,12 +1,17 @@
 package com.moviecatalog.model;
 
 import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -36,20 +41,16 @@ public class Movie {
 	private Date release_date;
 	private String type;
 
-	public String getKey() {
-		return key;
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "movie_comment", joinColumns = @JoinColumn(name = "movie_id"), inverseJoinColumns = @JoinColumn(name = "comment_id"))
+	private Set<Comment> comments;
+	
+	public String getId() {
+		return id;
 	}
 
-	public void setKey(String key) {
-		this.key = key;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public float getVote_average() {
@@ -58,6 +59,14 @@ public class Movie {
 
 	public void setVote_average(float vote_average) {
 		this.vote_average = vote_average;
+	}
+
+	public String getKey() {
+		return key;
+	}
+
+	public void setKey(String key) {
+		this.key = key;
 	}
 
 	public String getTitle() {
@@ -83,7 +92,7 @@ public class Movie {
 	public void setBackdrop_path(String backdrop_path) {
 		this.backdrop_path = backdrop_path;
 	}
-
+	
 	public String getOverview() {
 		return overview;
 	}
@@ -98,6 +107,14 @@ public class Movie {
 
 	public void setRelease_date(Date release_date) {
 		this.release_date = release_date;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public String toString() {
