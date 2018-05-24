@@ -1,7 +1,21 @@
 body {
 	font-family: Montserrat;
 	padding-top: 105px;
+	font-size: 16px;
+}
+
+html {
+	overflow: scroll;
 	overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+	width: 0px; /* remove scrollbar space */
+	background: transparent; /* optional: just make scrollbar invisible */
+}
+/* optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+	background: #FF0000;
 }
 
 .no-padding {
@@ -9,7 +23,7 @@ body {
 }
 
 .modal {
-	padding-top: 200px;
+	padding-top: 160px;
 }
 
 .modal-backdrop.in {
@@ -82,14 +96,6 @@ keyframes spin {to { transform:rotate(360deg);
 
 #play {
 	cursor: pointer;
-	margin: auto 16%;
-}
-
-@media ( min-width : 768px) {
-	#play {
-		cursor: pointer;
-		margin: auto 32%;
-	}
 }
 
 .full-width-image {
@@ -101,33 +107,162 @@ keyframes spin {to { transform:rotate(360deg);
 	background-repeat: no-repeat !important;
 	background-position: center top !important;
 	z-index: -1;
+	-moz-background-size: cover;
+	-webkit-background-size: cover;
+	-o-background-size: cover;
 	background-size: cover;
 	-webkit-box-shadow: inset 0px 0px 135px 20px rgba(0, 0, 0, 0.81);
 	-moz-box-shadow: inset 0px 0px 135px 20px rgba(0, 0, 0, 0.81);
 	box-shadow: inset 0px 0px 135px 20px rgba(0, 0, 0, 0.81);
+	filter: brightness(75%);
+	-webkit-filter: brightness(.75);
+	overflow: hidden;
 }
 
 .fondo {
 	margin-top: 90px;
 	background: rgba(0, 0, 0, 0.6);
-	border-radius: 20px;
+	border-radius: 10px;
 }
 
 .text-score {
-	color: white;
-	font-weight: bold;
-	font-size: 1.2em;
-	font-family: Segoe UI;
+	font-size: 22px;
+	height: 60px;
+	width: 60px;
+	background-color: #242431;
+	border-radius: 50%;
+	text-align: center;
+	padding: 14px;
+	position: absolute;
+	margin: 20% 0;
 }
 
 .score-bg {
-	background-color: #FA0E76;
-	height: 32px;
-	border-radius: 9px;
-	margin: 20% 0;
-	width: 82px;
-	text-align: center;
+	color: #00C1C9;
+	font-size: 25px;
+	font-weight: bold;
+	
 }
+
+.center {
+	margin-left: 31%;
+	margin-top: 30px;
+}
+
+.grow {
+	transition: all .2s ease-in-out;
+	-webkit-transition: all .2s ease-in-out;
+	-moz-transition: all 0.5s ease;
+}
+
+.grow:hover {
+	opacity: 0.9;
+}
+
+@media not all and (pointer: coarse) {
+	.grow:hover {
+		filter: brightness(80%);
+	}
+}
+
+.round {
+	border-radius: 10px;
+	filter: brightness(90%);
+}
+
+.sombra {
+	box-shadow: 0px 0px 29px 1px rgba(0, 0, 0, 0.64);
+}
+
+.carousel-control-next, .carousel-control-prev {
+	top: -90px;
+}
+
+.carousel-control-next {
+	right: -90px;
+}
+
+.carousel-control-prev {
+	left: -90px;
+}
+
+.carousel-control-next-icon, .carousel-control-prev-icon {
+	width: 30px;
+	height: 30px;
+}
+
+.media-carousel {
+	margin-bottom: 0;
+	padding: 0 40px 30px 40px;
+	margin-top: 30px;
+}
+/* Previous button  */
+.media-carousel .carousel-control.left {
+	left: -12px;
+	background-image: none;
+	background: none repeat scroll 0 0 #222222;
+	border: 4px solid #FFFFFF;
+	border-radius: 23px 23px 23px 23px;
+	height: 40px;
+	width: 40px;
+	margin-top: 30px
+}
+/* Next button  */
+.media-carousel .carousel-control.right {
+	right: -12px !important;
+	background-image: none;
+	background: none repeat scroll 0 0 #222222;
+	border: 4px solid #FFFFFF;
+	border-radius: 23px 23px 23px 23px;
+	height: 40px;
+	width: 40px;
+	margin-top: 30px
+}
+/* Changes the position of the indicators */
+.media-carousel .carousel-indicators {
+	right: 50%;
+	top: auto;
+	bottom: 0px;
+	margin-right: -19px;
+}
+/* Changes the colour of the indicators */
+.media-carousel .carousel-indicators li {
+	background: #c0c0c0;
+}
+
+.media-carousel .carousel-indicators .active {
+	background: #333333;
+}
+
+.media-carousel img {
+	width: 250px;
+	height: 100px
+}
+
+.bg-custom {
+	background-color: #252F3A;
+	opacity: 0.95;
+	border-radius: 10px;
+}
+
+.shadow-bottom {
+	box-shadow: inset 0px -38px 80px -58px #111;
+}
+
+.btn-custom {
+	background-color: #C2185B;
+}
+
+.marcar {
+	padding: 0 60px;
+}
+
+.bg-custom2{
+	background-color: #1D1E22;
+	border-radius:5px 5px 0 0;
+}
+
+
 /* 
 Extra small devices (portrait phones, less than 544px) 
 No media query since this is the default in Bootstrap because it is "mobile first"
@@ -138,6 +273,7 @@ h1 {
 *
 /
 /* Small devices (landscape phones, 544px and up) */
+
 
 
 
@@ -153,6 +289,16 @@ h1 {
 	h1 {
 		font-size: 2.5rem;
 	} /*1rem = 16px*/
+	#play {
+		cursor: pointer;
+		margin-bottom: 100px;
+	}
+	.center {
+		float: right;
+	}
+	.marcar {
+		padding: 0;
+	}
 }
 
 /* Large devices (desktops, 992px and up) */

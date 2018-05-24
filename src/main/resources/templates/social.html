@@ -20,7 +20,6 @@
 <!-- Custom styles for this template -->
 <link th:href="@{/css/index.css}" rel="stylesheet">
 <link th:href="@{/css/social.css}" rel="stylesheet">
-<script type="text/javascript" href="../js/social.js}"></script>
 
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat|Raleway|Work+Sans"
@@ -50,8 +49,16 @@
 					<li class="nav-item"><a class="nav-link" href="#">About</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">Services</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">Contact</a>
-					<li class="nav-item active"><a th:href="profile" class="nav-link" href="profile">Social
-					<span class="sr-only">(current)</span></a></li>
+					<li class="nav-item dropdown ml-4">
+				<a href="#" data-toggle="dropdown" class="nav-link  user-action p-1"><img src="https://www.tutorialrepublic.com/examples/images/avatar/3.jpg" class="avatar" alt="Avatar"></a>
+				<ul class="dropdown-menu dropdown-menu-right">
+					<li><a href="social" class="dropdown-item"><i class="fa fa-user-o"></i> Profile</a></li>
+					<li><a href="#" class="dropdown-item"><i class="fa fa-calendar-o"></i> Calendar</a></li>
+					<li><a href="#" class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a></li>
+					<li class="divider dropdown-divider"></li>
+					<li><a href="#" class="dropdown-item"><i class="material-icons">&#xE8AC;</i> Logout</a></li>
+				</ul>
+			</li>
 				</ul>
 			</div>
 		</div>
@@ -59,69 +66,137 @@
 
 	<!-- Page Content -->
 	<div class="container">
-		<div class="" style="height: 200px; width: 100%">
-			<h3 class="my-3 text-white">Perfil</h3>
-			<div class="row">
-				<div class="col-md-7 bg-white mr-5 rounded">
-					<div class="media">
-					  <img class="mr-3 my-3" src="http://ebus.ca/wp-content/uploads/2017/08/profile-placeholder.jpg" alt="Generic placeholder image" style="width:130px; height:130px;">
-					  <div class="media-body mb-4">
-					    <h5 class="mt-3">Mario Sánchez Melcón</h5>
-					    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-					  </div>
+		<h3 class="my-3 text-white">Perfil</h3>
+		<div class="row no-gutters px-3 shadow-bottom bg-custom">
+			<div class="col-lg-8">
+				<div class="media text-white">
+					<img class="m-4"
+						src="http://www.designskilz.com/random-users/images/imageM3.jpg"
+						alt="Generic placeholder image"
+						style="width: 130px; height: 130px;">
+					<div class="media-body p-3">
+						<h3 class="mt-2">Mario Sánchez Melcón</h3>
+						<p class="color3">Cras sit amet nibh libero, in gravida nulla.
+							Nulla vel metus scelerisque ante sollicitudin. Fusce condimentum
+							nunc ac nisi vulputate fringilla. Donec lacinia congue felis in
+							faucibus.</p>
 					</div>
 				</div>
-				<div class="col-md-3 bg-white rounded">Perfil222
+			</div>
+			<div class="col-lg-4 text-white pt-4">
+				<div class="row color1 pt-2" align="center">
+					<div class="col">
+						<div>
+							<p>Peliculas vistas</p>
+						</div>
+					</div>
+					<div class="col">
+						<div class="">
+							<p>Amigos</p>
+						</div>
+					</div>
+					<div class="col">
+						<div class="">
+							<p>Horas de visionado</p>
+						</div>
+					</div>
+				</div>
+				<div class="row color2 pt-1" align="center">
+					<div class="col">
+						<div class="">
+							<p>93</p>
+						</div>
+					</div>
+					<div class="col">
+						<div class="">
+							<p>22</p>
+						</div>
+					</div>
+					<div class="col">
+						<div class="">
+							<p>750</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<button type="button"
+					class="btn btn-custom text-white float-right mt-4">Añadir
+					amigo</button>
+			</div>
+		</div>
+		<div class="row mt-3">
+			<div class="col">
+				<ul class="nav" id="myTab" role="tablist">
+					<li class="nav-item"><a class="nav-link2 active" id="home-tab"
+						data-toggle="tab" href="#home" role="tab" aria-controls="home"
+						aria-selected="true">Vistas</a></li>
+					<li class="nav-item"><a class="nav-link2" id="profile-tab"
+						data-toggle="tab" href="#profile" role="tab"
+						aria-controls="profile" aria-selected="false">Favoritas</a></li>
+					<li class="nav-item"><a class="nav-link2" id="messages-tab"
+						data-toggle="tab" href="#messages" role="tab"
+						aria-controls="messages" aria-selected="false">Pendientes</a></li>
+					<li class="nav-item"><a class="nav-link2" id="settings-tab"
+						data-toggle="tab" href="#settings" role="tab"
+						aria-controls="settings" aria-selected="false">Amigos</a></li>
+				</ul>
+
+				<div class="tab-content">
+					<div class="tab-pane active text-white mt-3" id="home"
+						role="tabpanel" aria-labelledby="home-tab">
+						<div id="carouselExampleIndicators" class="carousel slide"
+							data-ride="carousel" data-interval="false">
+							<div class="carousel-inner">
+								<div class="carousel-item"
+									th:each="i : ${#numbers.sequence( 1, #lists.size(movies))}"
+									th:if="${iStat.count} % 7== 0"
+									th:classappend="${i} == 7 ? active">
+									<div class="row  p-4">
+										<div class="col-lg-2 col-md-2 col-sm-2 portfolio-item grow"
+											th:each="movie:${movies}" th:if="${movieStat.count} lt ${i}"
+											th:remove="${movieStat.count} lt ${i}-6? all">
+											<div class="border border-0">
+												<a th:href="'movie?id=' + ${movie.id}"><img
+													class="card-img-top round sombra"
+													th:src="@{https://image.tmdb.org/t/p/w342} + ${movie.poster_path}"
+													alt=""></a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<a class="carousel-control-prev m-0"
+								href="#carouselExampleIndicators" role="button"
+								data-slide="prev"> <span class="carousel-control-prev-icon"
+								aria-hidden="true"></span> <span class="sr-only">Previous</span>
+							</a> <a class="carousel-control-next"
+								href="#carouselExampleIndicators" role="button"
+								data-slide="next"> <span class="carousel-control-next-icon"
+								aria-hidden="true"></span> <span class="sr-only">Next</span>
+							</a>
+						</div>
+					</div>
+					<div class="tab-pane text-white mt-3" id="profile" role="tabpanel"
+						aria-labelledby="profile-tab">ASDHisoaudasjdIOÑJDSAO</div>
+					<div class="tab-pane text-white mt-3" id="messages" role="tabpanel"
+						aria-labelledby="messages-tab">asodipjaiosdjifjewuiofhnwendefuhdefuih</div>
+					<div class="tab-pane text-white mt-3" id="settings" role="tabpanel"
+						aria-labelledby="settings-tab">DAsdmopasdj sdj sijdasjd</div>
 				</div>
 			</div>
 		</div>
-		<h3 class="mt-5 mb-2 text-white" data-toggle="popover">Películas seguidas</h3>
-		
-		<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="false">
-				  <ol class="carousel-indicators">
-				    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-				    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-				    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-				    <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-				  </ol>
-				 <div class="carousel-inner">
-					<div class="carousel-item" 
-							th:each="i : ${#numbers.sequence( 1, 100/1)}" 
-							th:if="${iStat.count} % 7== 0"
-							th:classappend="${i} == 7 ? active">
-						<div class="row">
-					 	<div class="col-lg-2 col-md-2 col-sm-2 portfolio-item grow"
-							th:each="movie:${movies}"  th:if="${movieStat.count} lt ${i}" th:remove="${movieStat.count} lt ${i}-6? all">
-							<div class="border border-0">
-								<a th:href="'movie?id=' + ${movie.id}"><img
-									class="card-img-top round sombra"
-									th:src="@{https://image.tmdb.org/t/p/w342} + ${movie.poster_path}"
-									alt=""></a>
-							</div>
-							<p class="mt-1">
-								<a class="text-white" th:href="'movie?id=' + ${movie.id}"
-									th:text="${movie.title}"></a>
-							</p>
-						</div>
-						</div>
-					</div>
-				</div>
-				  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-				    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-				    <span class="sr-only">Previous</span>
-				  </a>
-				  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-				    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-				    <span class="sr-only">Next</span>
-				  </a>
-		</div>
-				<!-- FIN CAROUSEL -->
-				
-		<h3 class="my-3 text-white">Seguidores</h3>
-		<h3 class="my-3 text-white">Seguidos</h3>
-		<h3 class="my-3 text-white">Estadisticas</h3>
 	</div>
-	<!-- /.container -->
+
+
+	<!-- FIN CAROUSEL -->
 
 	<!-- Footer -->
 	<footer class="py-5 bg-dark">
@@ -144,6 +219,8 @@
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
 		integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
 		crossorigin="anonymous"></script>
+
+	<script type="text/javascript" href="../js/social.js}"></script>
 
 </body>
 

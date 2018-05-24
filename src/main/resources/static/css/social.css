@@ -1,21 +1,84 @@
-.perfil-img{
+body {
+	font-family: Montserrat;
+}
+
+.perfil-img {
 	width: 200px;
 	height: 150px;
 }
 
-.carousel-control-next, .carousel-control-prev{
-	top:280px;
+.carousel-control-next, .carousel-control-prev {
+	top: 110px;
+	width: 30px;
+	height: 30px;
 }
 
 .carousel-control-next {
-    right: 300px;
+	right: -40px;
 }
 
 .carousel-control-prev {
-    left: 300px;
+	left: -40px;
 }
 
 .carousel-control-next-icon, .carousel-control-prev-icon {
-	width:35px;
-	height: 35px;
+	width: 30px;
+	height: 30px;
+}
+
+.bg-custom {
+	background-color: #252F3A;
+}
+
+.color1 {
+	color: #6E7A88;
+}
+
+.color2 {
+	color: #F5F5F6;
+	font-size: 24px;
+}
+
+.color3 {
+	color: #C5D1DE;
+}
+
+.btn-custom {
+	background-color: #C2185B;
+	transition: all 0.3s ease 0s;
+}
+
+.btn-custom:hover {
+	background-color: #b20847;
+}
+
+.shadow-bottom {
+	box-shadow: inset 0px -38px 80px -58px #111;
+}
+
+.shadow-behind {
+	box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.26);
+}
+
+.nav-link2 {
+	padding: 0 35px 0 0;
+	font-size: 24px;
+	color: #5D6874;
+	transition: all 0.42s ease 0s;
+}
+
+.nav-link2:hover {
+	color: #F5F5F5;
+	text-decoration: none;
+}
+
+.nav-link2.active {
+	color: #F5F5F5;
+}
+
+.navbar img {
+	border-radius: 50%;
+	width: 36px;
+	height: 36px;
+	margin-right: 10px;
 }

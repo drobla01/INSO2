@@ -36,7 +36,7 @@
 	<!-- Navigation -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<div class="container">
-			<a class="navbar-brand" href="/">Start Bootstrap</a>
+			<a class="navbar-brand" href="/">Cinebook</a>
 			<button class="custom-toggler navbar-toggler" type="button"
 				data-toggle="collapse" data-target="#navbarResponsive"
 				aria-controls="navbarResponsive" aria-expanded="false"
@@ -52,6 +52,7 @@
 					<li class="nav-item"><a class="nav-link" href="#">Services</a>
 					</li>
 					<li class="nav-item"><a class="nav-link" href="#">Contact</a>
+					</li>
 					<li class="nav-item"><a th:href="social" class="nav-link" href="profile">Social</a>
 					</li>
 				</ul>
@@ -66,7 +67,7 @@
 		<h1 class="my-4 text-white">Trending</h1>
 
 		<div class="row">
-			<div class="col-lg-3 col-md-4 col-sm-6 portfolio-item grow"
+			<div class="col-lg-3 col-md-4 col-sm-6 col-6 portfolio-item grow"
 				th:each="movie:${movies}">
 				<div class="border border-0">
 					<a th:href="'movie?id=' + ${movie.id}"><img

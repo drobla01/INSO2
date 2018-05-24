@@ -25,6 +25,12 @@
 	href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat|Raleway|Work+Sans"
 	rel="stylesheet">
 
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.0.10/css/all.css"
+	integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg"
+	crossorigin="anonymous">
+
+<link th:href="@{/css/component.css}" rel="stylesheet">
 </head>
 
 <body>
@@ -32,12 +38,12 @@
 	<!-- Navigation -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<div class="container">
-			<a class="navbar-brand" href="/">Start Bootstrap</a>
-			<button class="custom-toggler navbar-toggler" type="button" data-toggle="collapse"
-				data-target="#navbarResponsive" aria-controls="navbarResponsive"
-				aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon">
-				</span>
+			<a class="navbar-brand" href="/">Cinebook</a>
+			<button class="custom-toggler navbar-toggler" type="button"
+				data-toggle="collapse" data-target="#navbarResponsive"
+				aria-controls="navbarResponsive" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"> </span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
@@ -58,7 +64,7 @@
 	<div class="full-width-image"
 		th:style="'background-image: url(' + @{https://image.tmdb.org/t/p/original} + ${movie.backdrop_path} + ');'"></div>
 
-	<div class="container">
+	<div class="container mt-4">
 		<div class="row">
 			<div class="col" align="center">
 				<h1 class="text-white font-weight-bold mb-4"
@@ -67,16 +73,10 @@
 		</div>
 	</div>
 
-	<div class="container mx-auto m-4">
+	<div class="container mx-auto mt-5">
 		<div class="row">
-			<div class="col-lg-2 col-md-2 col-sm-2 col-3">
-				<div class="score-bg">
-					<span class="text-score" th:text="${movie.vote_average}+'&nbsp;'"></span><span
-						class="text-white font-weight-bold mx-auto">/ &nbsp;10</span>
-				</div>
+			<div class="col" th:if="${trailer.key != null}" align="center">
 
-			</div>
-			<div class="col-lg-10 col-md-10 col-sm-10 col-8">
 				<svg class="launch-modal" data-modal-id="modal-video" version="1.1"
 					id="play" xmlns="http://www.w3.org/2000/svg"
 					xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -89,14 +89,172 @@
 						d="M38,69c-1,0.5-1.8,0-1.8-1.1V32.1c0-1.1,0.8-1.6,1.8-1.1l34,18c1,0.5,1,1.4,0,1.9L38,69z" />
 </svg>
 			</div>
+
 		</div>
 	</div>
 
-	<div class="container fondo">
+	<div class="container mt-5">
+		<div class="row">
+			<div class="col-lg-10"></div>
+
+			<div class="col-lg-2 col marcar" align="center">
+				<button type="button"
+					class="btn btn-custom btn-block dropdown-toggle text-white"
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Marcar como</button>
+				<div class="dropdown-menu dropdown-menu-center">
+					<button class="dropdown-item" type="button">Vista</button>
+					<button class="dropdown-item" type="button">Pendiente</button>
+					<button class="dropdown-item md-trigger" data-modal="modal-1"
+						type="button">Recomendar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="container bg-custom shadow-bottom mt-3">
+		<div class="row p-3 bg-custom2">
+			<div class="col-lg-10 col" style="color: #00C1C9">
+				<i class="far fa-clock pr-1"></i> <span class="text-white"
+					th:text="${movie.runtime}"></span><span class="text-white">
+					min</span>
+			</div>
+			<div class="col-lg-2 col">
+				<i class="fas fa-star fa-sm pr-1" style="color: #00C1C9"></i> <span
+					class="score-bg" th:text="${movie.vote_average}"></span>
+
+			</div>
+		</div>
+		<div class="row pt-4">
+			<div class="col">
+				<h4 class="text-white font-weight-bold px-4">Sinopsis</h4>
+				<p class="text-white p-4 mx-auto" th:text="${movie.overview}"></p>
+			</div>
+		</div>
 		<div class="row">
 			<div class="col">
-				<p class="text-white font-weight-bold p-4 mx-auto"
-					th:text="${movie.overview}"></p>
+				<h3 class="text-white font-weight-bold px-4">Cast</h3>
+			</div>
+			<div class="col"></div>
+		</div>
+		<!-- <div class="row p-3">
+			<div class="col-lg-6">
+				<div class="row">
+					<div class="col-lg-2 grow">
+						<a href=""><img class="card-img-top round sombra"
+							src="https://image.tmdb.org/t/p/w185/1YjdSym1jTG7xjHSI0yGGWEsw5i.jpg"
+							alt=""></a>
+						<p class="mt-2">
+							<a class="text-white" href="" text="">Robert Downey Jr.</a>
+						</p>
+					</div>
+					<div class="col-lg-2 portfolio-item grow">
+						<a href=""><img class="card-img-top round sombra"
+							src="https://image.tmdb.org/t/p/w185/kRlx7PxXkom7Daj8Z2HmcbPQB1o.jpg"
+							alt=""></a>
+						<p class="mt-2">
+							<a class="text-white" href="" text="">Chris Evans</a>
+						</p>
+					</div>
+					<div class="col-lg-2 portfolio-item grow">
+						<a href=""><img class="card-img-top round sombra"
+							src="https://image.tmdb.org/t/p/w185/lrhth7yK9p3vy6p7AabDUM1THKl.jpg"
+							alt=""></a>
+						<p class="mt-2">
+							<a class="text-white" href="" text="">Chris Hemsworth</a>
+						</p>
+					</div>
+					<div class="col-lg-2 portfolio-item grow">
+						<a href=""><img class="card-img-top round"
+							src="https://image.tmdb.org/t/p/w185/isQ747u0MU8U9gdsNlPngjABclH.jpg"
+							alt=""></a>
+						<p class="mt-2">
+							<a class="text-white" href="" text="">Mark Ruffalo</a>
+						</p>
+					</div>
+					<div class="col-lg-2 portfolio-item grow">
+						<a href=""><img class="card-img-top round"
+							src="https://image.tmdb.org/t/p/w185/isQ747u0MU8U9gdsNlPngjABclH.jpg"
+							alt=""></a>
+						<p class="mt-2">
+							<a class="text-white" href="" text="">Mark Ruffalo</a>
+						</p>
+					</div>
+					<div class="col-lg-2 portfolio-item grow">
+						<a href=""><img class="card-img-top round"
+							src="https://image.tmdb.org/t/p/w185/isQ747u0MU8U9gdsNlPngjABclH.jpg"
+							alt=""></a>
+						<p class="mt-2">
+							<a class="text-white" href="" text="">Mark Ruffalo</a>
+						</p>
+					</div>
+					<div class="col-lg-2 portfolio-item grow">
+						<a href=""><img class="card-img-top round"
+							src="https://image.tmdb.org/t/p/w185/isQ747u0MU8U9gdsNlPngjABclH.jpg"
+							alt=""></a>
+						<p class="mt-2">
+							<a class="text-white" href="" text="">Mark Ruffalo</a>
+						</p>
+					</div>
+					<div class="col-lg-2 portfolio-item grow">
+						<a href=""><img class="card-img-top round"
+							src="https://image.tmdb.org/t/p/w185/isQ747u0MU8U9gdsNlPngjABclH.jpg"
+							alt=""></a>
+						<p class="mt-2">
+							<a class="text-white" href="" text="">Mark Ruffalo</a>
+						</p>
+					</div>
+
+				</div>
+			</div>
+			<div class="col-lg-6">
+				<div class="row"></div>
+			</div>
+		</div> -->
+
+		<div class="row d-none d-sm-block mx-2">
+			<h4 class="text-white p-3">Películas similares</h4>
+		</div>
+		<div class="row px-4">
+			<div class="col d-none d-sm-block">
+				<div id="carouselExampleIndicators" class="carousel slide"
+					data-ride="carousel" data-interval="false">
+					<div class="carousel-inner">
+						<div class="carousel-item"
+							th:each="i : ${#numbers.sequence( 1, 100/1)}"
+							th:if="${iStat.count} % 7== 0"
+							th:classappend="${i} == 7 ? active">
+							<div class="row  p-4">
+								<div
+									class="col-lg-2 col-md-3 col-sm-3 col-6 portfolio-item grow"
+									th:each="movie:${movies}" th:if="${movieStat.count} lt ${i}"
+									th:remove="${movieStat.count} lt ${i}-6? all">
+									<div class="border border-0">
+										<a th:href="'movie?id=' + ${movie.id}"><img
+											class="card-img-top round sombra"
+											th:src="@{https://image.tmdb.org/t/p/w342} + ${movie.poster_path}"
+											alt=""></a>
+									</div>
+									<p class="mt-1">
+										<a class="text-white" th:href="'movie?id=' + ${movie.id}"
+											th:text="${movie.title}"></a>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<a class="carousel-control-prev m-0"
+						href="#carouselExampleIndicators" role="button" data-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="sr-only">Previous</span>
+					</a> <a class="carousel-control-next" href="#carouselExampleIndicators"
+						role="button" data-slide="next"> <span
+						class="carousel-control-next-icon" aria-hidden="true"></span> <span
+						class="sr-only">Next</span>
+					</a>
+				</div>
+				<!-- FIN CAROUSEL -->
 			</div>
 		</div>
 	</div>
@@ -143,6 +301,10 @@
 		crossorigin="anonymous"></script>
 
 	<script type="text/javascript" th:src="@{/js/movie.js}"></script>
+
+	<script th:src="@{js/modernizr.custom.js}"></script>
+	<script th:src="@{js/classie.js}"></script>
+	<script th:src="@{js/modalEffects.js}"></script>
 
 </body>
 

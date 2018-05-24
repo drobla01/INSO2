@@ -1,5 +1,7 @@
 package com.moviecatalog.demo;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,14 +46,40 @@ public class WebController {
 		RestTemplate restTemplate = new RestTemplate();
 		Results videos = restTemplate.getForObject("https://api.themoviedb.org/3/movie/" + id
 				+ "/videos?api_key=9ae4cb8d6fe7e69356db23d14dd945dd&language=es-ES", Results.class);
+
+		Movie movie = restTemplate.getForObject(
+				"https://api.themoviedb.org/3/movie/" + id + "?api_key=9ae4cb8d6fe7e69356db23d14dd945dd&language=es-ES",
+				Movie.class);
+
+		String genres = movie.toStringGenres();
+
+		Results similarMovies = restTemplate.getForObject(
+				"https://api.themoviedb.org/3/discover/movie?api_key=9ae4cb8d6fe7e69356db23d14dd945dd&language=es-ES&region=US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres="
+						+ genres,
+				Results.class);
 		
-		Movie movie = restTemplate.getForObject("https://api.themoviedb.org/3/movie/"+id+"?api_key=9ae4cb8d6fe7e69356db23d14dd945dd&language=es-ES", Movie.class);
+		model.addAttribute("movies", removeMovieFromRecommended(similarMovies, movie.getId()));
 		model.addAttribute("trailer", findMovieByTrailer(videos));
+
 		model.addAttribute("movie", movie);
 		return "movie";
 	}
+	
+	public List<Movie> removeMovieFromRecommended(Results similarMovies, String movieId) {
 
+		for (int i = 0; i < similarMovies.getResults().size(); i++) {
+			if (similarMovies.getResults().get(i).getId().equals(movieId)) {
+				similarMovies.getResults().remove(similarMovies.getResults().get(i));
+			}
+		}
+		return similarMovies.getResults();
+	}
+	
 	public Movie findMovieByTrailer(Results var) {
+
+		if (var.getResults().size() == 0) {
+			return new Movie();
+		}
 		for (Movie movie : var.getResults())
 			if (movie.getType().equals("Trailer"))
 				return movie;

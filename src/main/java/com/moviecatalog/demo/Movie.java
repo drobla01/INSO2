@@ -17,7 +17,25 @@ public class Movie {
 	private Date release_date;
 	private String type;
 	private String id;
+	private List<Genre> genres;
+	private String runtime;
+	private String tagline;
 	
+	public String getRuntime() {
+		return runtime;
+	}
+
+	public void setRuntime(String runtime) {
+		this.runtime = runtime;
+	}
+
+	public String getTagline() {
+		return tagline;
+	}
+
+	public void setTagline(String tagline) {
+		this.tagline = tagline;
+	}
 
 	public String getId() {
 		return id;
@@ -91,9 +109,32 @@ public class Movie {
 		this.release_date = release_date;
 	}
 
+	public List<Genre> getGenres() {
+		return genres;
+	}
+
+	public void setGenres(List<Genre> genres) {
+		this.genres = genres;
+	}
+
+	public String toStringGenres() {
+		String var = "";
+
+//		for (int i = 0; i < genres.size(); i++) {
+//			if (i != genres.size() - 1) {
+//				var += genres.get(i).getId() + ",";
+//			} else {
+//				var += genres.get(i).getId();
+//			}
+//		}
+		var += genres.get(0).getId() +",";
+		var += genres.get(1).getId();
+		return var;
+	}
+
 	public String toString() {
 		return "Title: " + title + "{" + "Overview='" + overview + '\'' + "Vote average='" + vote_average + '\''
 				+ ", Release date=" + release_date.toString() + '}';
 	}
-	
+
 }
