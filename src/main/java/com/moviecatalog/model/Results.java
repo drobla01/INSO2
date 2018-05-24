@@ -1,8 +1,6 @@
-package com.moviecatalog.demo;
+package com.moviecatalog.model;
 
 import java.util.List;
-
-import com.moviecatalog.model.Movie;
 
 public class Results {
 

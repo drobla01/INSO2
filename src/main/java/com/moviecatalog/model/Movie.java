@@ -1,30 +1,40 @@
 package com.moviecatalog.model;
 
 import java.util.Date;
-import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@Entity
+@Table(name="movie")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Movie {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+    @Column(name = "movie_id")
+    private String id;
+	
 	private float vote_average;
+	
+	@Column(name = "keyy")
 	private String key;
 	private String title;
 	private String poster_path;
 	private String backdrop_path;
 	private String overview;
+	
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date release_date;
 	private String type;
-	private String id;
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
 
 	public String getKey() {
 		return key;
