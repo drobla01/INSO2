@@ -1,0 +1,84 @@
+body {
+	background-color: #202231;
+	margin-top: 54px;
+	color: white;
+	font-family: Open Sans;
+}
+
+.barra{
+	background-color:#3C3F63;
+}
+
+#movieImage {
+	width: 330px;
+	padding: 50px 35px 50px 10px;
+}
+
+.section1 {
+	padding: 30px;
+}
+
+.botones {
+	margin-top: 50px;
+}
+
+.title {
+	font-size: 60px;
+}
+
+.subHeader {
+	color: #D2D2D5;
+	font-size: 22px;
+}
+
+.section2 {
+	padding: 40px 40px 1px 40px; background-color : #F0F3F7;
+	font-family: Work Sans;
+	color: #373339;
+	background-color: #F0F3F7;
+}
+
+.box {
+	border-radius: 5px;
+	padding: 40px 18px;
+	background-color: #FFFFFF;
+	box-shadow: 0px 0px 29px 1px rgba(0, 0, 0, 0.09);
+	margin-bottom: 38px;
+}
+
+@media ( min-width : 544px) {
+	h1 {
+		font-size: 1rem;
+	} /*1rem = 16px*/
+}
+
+/* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+@media ( min-width : 768px) {
+	h1 {
+		font-size: 2.5rem;
+	} /*1rem = 16px*/
+	.section1 {
+		padding: 70px 0;
+	}
+	.title {
+		font-size: 72px;
+	}
+	#movieImage {
+		width: 360px;
+		padding: 0;
+	}
+}
+
+/* Large devices (desktops, 992px and up) */
+@media ( min-width : 992px) {
+	h1 {
+		font-size: 3rem;
+	} /*1rem = 16px*/
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media ( min-width : 1200px) {
+	h1 {
+		font-size: 4rem;
+	} /*1rem = 16px*/
+}

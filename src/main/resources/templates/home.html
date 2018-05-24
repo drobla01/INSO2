@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>4 Col Portfolio - Start Bootstrap Template</title>
+
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+	integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+	crossorigin="anonymous">
+
+<!-- Custom styles for this template -->
+<link th:href="@{/css/home.css}" rel="stylesheet">
+
+<link
+	href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat|Raleway|Work+Sans"
+	rel="stylesheet">
+
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.0.10/css/all.css"
+	integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg"
+	crossorigin="anonymous">
+
+</head>
+
+<body>
+
+	<!-- Navigation -->
+	<nav class="navbar navbar-expand-lg navbar-dark barra fixed-top">
+		<div class="container">
+			<a class="navbar-brand" href="/">Cinebook</a>
+			<button class="custom-toggler navbar-toggler" type="button"
+				data-toggle="collapse" data-target="#navbarResponsive"
+				aria-controls="navbarResponsive" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"> </span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item active"><a class="nav-link" href="#">Home
+							<span class="sr-only">(current)</span>
+					</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">About</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">Services</a>
+					</li>
+					<li class="nav-item"><a class="nav-link" href="#">Contact</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<!-- Page Content -->
+
+	<div class="container section1">
+		<div class="row">
+			<div class="col">
+				<p class="title font-weight-bold">Cinebook</p>
+				<p class="subHeader mt-3">Descubre nuevas películas y series de
+					televisión, discute, opina y recomiendalas a tus amigos</p>
+				<div class="row botones">
+					<div class="col">
+						<button type="button" class="btn btn-secondary">Inicia
+							sesión</button>
+						<button type="button" class="btn btn-secondary ml-5">Regístrate</button>
+					</div>
+				</div>
+			</div>
+			<div class="col" align="center">
+				<img id="movieImage" th:src="@{img/movies.svg}" alt="">
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid section2">
+		<div class="container" align="center">
+			<div class="row my-4">
+				<div class="col-lg-3 col-sm-12">
+					<div class="box">
+						<i class="fas fa-search fa-4x"></i>
+						<h3 class="mt-2">Descubre</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+							sed do eiusmod tempor incididunt ut labore et dolore magna
+							aliqua.</p>
+					</div>
+
+				</div>
+				<div class="col-lg-3 col-sm-12">
+					<div class="box">
+						<span><i class="fas fa-comment fa-4x"></i></span>
+						<h3 class="mt-2">Opina</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+							sed do eiusmod tempor incididunt ut labore et dolore magna
+							aliqua.</p>
+					</div>
+
+				</div>
+				<div class="col-lg-3 col-sm-12">
+					<div class="box">
+						<i class="fas fa-film fa-4x"></i>
+						<h3 class="mt-2">Organiza</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+							sed do eiusmod tempor incididunt ut labore et dolore magna
+							aliqua.</p>
+					</div>
+				</div>
+
+				<div class="col-lg-3 col-sm-12">
+					<div class="box">
+						<i class="fas fa-users fa-4x"></i>
+						<h3 class="mt-2">Comparte</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+							sed do eiusmod tempor incididunt ut labore et dolore magna
+							aliqua.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Footer -->
+	<footer class="py-5 bg-dark">
+		<div class="container">
+			<p class="m-0 text-center text-white">Copyright &copy; Your
+				Website 2018</p>
+		</div>
+		<!-- /.container -->
+	</footer>
+
+	<!-- Bootstrap core JavaScript -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+		integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+		integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+		crossorigin="anonymous"></script>
+
+</body>
+
+</html>
