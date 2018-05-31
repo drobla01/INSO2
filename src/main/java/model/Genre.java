@@ -1,4 +1,4 @@
-package com.moviecatalog.demo;
+package model;
 
 public class Genre {
 	

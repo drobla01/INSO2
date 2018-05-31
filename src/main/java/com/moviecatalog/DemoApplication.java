@@ -1,4 +1,4 @@
-package com.moviecatalog.demo;
+package com.moviecatalog;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
