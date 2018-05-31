@@ -1,42 +1,50 @@
 package com.moviecatalog.model;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@Entity
+@Table(name="movie")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Movie {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+    @Column(name = "movie_id")
+    private String id;
+	
 	private float vote_average;
+	
+	@Column(name = "keyy")
 	private String key;
 	private String title;
 	private String poster_path;
 	private String backdrop_path;
 	private String overview;
+	
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date release_date;
 	private String type;
-	private String id;
-	private List<Genre> genres;
-	private String runtime;
-	private String tagline;
+
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "movie_comment", joinColumns = @JoinColumn(name = "movie_id"), inverseJoinColumns = @JoinColumn(name = "comment_id"))
+	private Set<Comment> comments;
 	
-	public String getRuntime() {
-		return runtime;
-	}
-
-	public void setRuntime(String runtime) {
-		this.runtime = runtime;
-	}
-
-	public String getTagline() {
-		return tagline;
-	}
-
-	public void setTagline(String tagline) {
-		this.tagline = tagline;
-	}
-
 	public String getId() {
 		return id;
 	}
@@ -45,28 +53,20 @@ public class Movie {
 		this.id = id;
 	}
 
-	public String getKey() {
-		return key;
-	}
-
-	public void setKey(String key) {
-		this.key = key;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
 	public float getVote_average() {
 		return vote_average;
 	}
 
 	public void setVote_average(float vote_average) {
 		this.vote_average = vote_average;
+	}
+
+	public String getKey() {
+		return key;
+	}
+
+	public void setKey(String key) {
+		this.key = key;
 	}
 
 	public String getTitle() {
@@ -92,7 +92,7 @@ public class Movie {
 	public void setBackdrop_path(String backdrop_path) {
 		this.backdrop_path = backdrop_path;
 	}
-
+	
 	public String getOverview() {
 		return overview;
 	}
@@ -109,14 +109,36 @@ public class Movie {
 		this.release_date = release_date;
 	}
 
-	public List<Genre> getGenres() {
-		return genres;
+	public String getType() {
+		return type;
 	}
 
-	public void setGenres(List<Genre> genres) {
-		this.genres = genres;
+	public void setType(String type) {
+		this.type = type;
 	}
 
+	public String toString() {
+		return "Title: " + title + "{" + "Overview='" + overview + '\'' + "Vote average='" + vote_average + '\''
+				+ ", Release date=" + release_date.toString() + '}';
+	}
+	
+}
+
+	private List<Genre> genres;
+	private String runtime;
+	private String tagline;
+	public String getRuntime() {
+		return runtime;
+	}
+	public void setRuntime(String runtime) {
+		this.runtime = runtime;
+	}
+	public String getTagline() {
+		return tagline;
+	}
+	public void setTagline(String tagline) {
+		this.tagline = tagline;
+	}
 	public String toStringGenres() {
 		String var = "";
 
@@ -131,10 +153,9 @@ public class Movie {
 		var += genres.get(1).getId();
 		return var;
 	}
-
-	public String toString() {
-		return "Title: " + title + "{" + "Overview='" + overview + '\'' + "Vote average='" + vote_average + '\''
-				+ ", Release date=" + release_date.toString() + '}';
+	public void setGenres(List<Genre> genres) {
+		this.genres = genres;
 	}
-
-}
+	public List<Genre> getGenres() {
+		return genres;
+	}
