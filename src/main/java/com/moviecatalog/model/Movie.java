@@ -16,6 +16,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -37,8 +38,14 @@ public class Movie {
 	private String poster_path;
 	private String backdrop_path;
 	private String overview;
+	
+	@Transient
 	private List<Genre> genres;
+	
+	@Transient
 	private String runtime;
+	
+	@Transient
 	private String tagline;
 	
 	@Temporal(TemporalType.TIMESTAMP)
