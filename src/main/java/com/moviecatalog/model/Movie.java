@@ -1,4 +1,4 @@
-package model;
+package com.moviecatalog.model;
 
 import java.util.Date;
 import java.util.List;
