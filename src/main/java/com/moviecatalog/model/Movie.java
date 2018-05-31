@@ -1,6 +1,7 @@
 package com.moviecatalog.model;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -36,6 +37,9 @@ public class Movie {
 	private String poster_path;
 	private String backdrop_path;
 	private String overview;
+	private List<Genre> genres;
+	private String runtime;
+	private String tagline;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date release_date;
@@ -122,11 +126,6 @@ public class Movie {
 				+ ", Release date=" + release_date.toString() + '}';
 	}
 	
-}
-
-	private List<Genre> genres;
-	private String runtime;
-	private String tagline;
 	public String getRuntime() {
 		return runtime;
 	}
@@ -159,3 +158,8 @@ public class Movie {
 	public List<Genre> getGenres() {
 		return genres;
 	}
+	
+}
+
+	
+	
