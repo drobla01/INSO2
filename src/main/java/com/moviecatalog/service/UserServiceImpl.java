@@ -1,6 +1,7 @@
 package com.moviecatalog.service;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +34,15 @@ public class UserServiceImpl implements UserService{
 	public void saveUser(User user) {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setActive(1);
+        
+        Date date = new Date();
+        user.setCreation(date);
+        user.setUpdated(date);
+        
         Role userRole = roleRepository.findByRole("USER");
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
-		userRepository.save(user);
+		
+        userRepository.save(user);
 	}
 
 }
