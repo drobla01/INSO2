@@ -123,4 +123,19 @@ public class User {
 		this.password = password;
 	}
 
+	public Set<User> getFollows() {
+		return follows;
+	}
+
+	public void setFollows(Set<User> follows) {
+		this.follows = follows;
+	}
+
+	public Set<Movie> getFavourites() {
+		return favourites;
+	}
+
+	public void setFavourites(Set<Movie> favourites) {
+		this.favourites = favourites;
+	}
 }

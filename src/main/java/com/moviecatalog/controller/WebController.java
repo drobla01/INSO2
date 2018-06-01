@@ -3,19 +3,15 @@ package com.moviecatalog.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
 import com.moviecatalog.model.Movie;
 import com.moviecatalog.model.Results;
-import com.moviecatalog.model.User;
 import com.moviecatalog.service.UserService;
 
 @Controller
@@ -25,7 +21,7 @@ public class WebController {
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping("/index")
+	@RequestMapping("/user/index")
 	public String showIndex(Model model) {
 
 		RestTemplate restTemplate = new RestTemplate();
@@ -33,10 +29,10 @@ public class WebController {
 				"https://api.themoviedb.org/3/discover/movie?api_key=9ae4cb8d6fe7e69356db23d14dd945dd&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1",
 				Results.class);
 		model.addAttribute("movies", response.getResults());
-		return "index";
+		return "user/index";
 	}
 	
-	@GetMapping("/social")
+	@GetMapping("/user//social")
 	public String goToProfile(Model model) {
 		RestTemplate restTemplate = new RestTemplate();
 		Results response = restTemplate.getForObject(
@@ -45,10 +41,10 @@ public class WebController {
 		model.addAttribute("movies", response.getResults());
 		model.addAttribute("size", response.getResults().size());
 		
-		return "social";
+		return "user/social";
 	}
 
-	@GetMapping("/movie")
+	@GetMapping("/user/movie")
 	public String renderImage(@RequestParam(name = "id", required = true) String id, Model model) {
 
 		RestTemplate restTemplate = new RestTemplate();
@@ -70,7 +66,7 @@ public class WebController {
 		model.addAttribute("trailer", findMovieByTrailer(videos));
 
 		model.addAttribute("movie", movie);
-		return "movie";
+		return "user/movie";
 	}
 	
 	@RequestMapping("/home")

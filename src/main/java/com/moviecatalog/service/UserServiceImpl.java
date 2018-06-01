@@ -3,7 +3,6 @@ package com.moviecatalog.service;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
