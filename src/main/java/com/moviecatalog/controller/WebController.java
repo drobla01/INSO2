@@ -3,6 +3,8 @@ package com.moviecatalog.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,12 +15,17 @@ import org.springframework.web.client.RestTemplate;
 
 import com.moviecatalog.model.Movie;
 import com.moviecatalog.model.Results;
+import com.moviecatalog.model.User;
+import com.moviecatalog.service.UserService;
 
 @Controller
 
 public class WebController {
 
-	@RequestMapping("/")
+	@Autowired
+	private UserService userService;
+	
+	@RequestMapping("/index")
 	public String showIndex(Model model) {
 
 		RestTemplate restTemplate = new RestTemplate();
@@ -75,6 +82,10 @@ public class WebController {
 				Results.class);
 
 		model.addAttribute("movies", response.getResults());
+		
+		//Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		//User user = userService.findUserByEmail(auth.getName());
+		//model.addAttribute("userName","Welcome, " + user.getName());
 		return "home";
 	}
 	

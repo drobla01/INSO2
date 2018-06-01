@@ -42,9 +42,6 @@ public class User {
     private Date creation;
     
     @Temporal(TemporalType.TIMESTAMP)
-    private Date unregister;
-    
-    @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
     private Date updated;
     
@@ -126,11 +123,4 @@ public class User {
 		this.password = password;
 	}
 
-	public Date getUnregister() {
-		return unregister;
-	}
-
-	public void setUnregister(Date unregister) {
-		this.unregister = unregister;
-	}
 }
