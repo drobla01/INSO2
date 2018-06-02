@@ -23,5 +23,9 @@ $(document).ready(function() {
 	    }
 	}
 	
+    $("#input-comment").click(function(){
+        $("#publish-comment").show();
+    });
+	
 });
 

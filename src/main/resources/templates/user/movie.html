@@ -90,7 +90,7 @@
 	</div>
 
 
-	<div class="container bg-custom shadow-bottom mt-3">
+	<div class="container bg-custom shadow-bottom mt-3 pb-5">
 		<div class="row p-3 bg-custom2">
 			<div class="col-lg-10 col" style="color: #00C1C9">
 				<i class="far fa-clock pr-1"></i> <span class="text-white"
@@ -234,52 +234,114 @@
 				<!-- FIN CAROUSEL -->
 			</div>
 		</div>
-	</div>
 
+		<div class="row py-2">
+			<div class="col">
+				<h3 class="text-white font-weight-bold px-4">Comentarios</h3>
+			</div>
+		</div>
 
-	<!-- MODAL -->
-	<div class="modal fade" id="modal-video" tabindex="-1" role="dialog"
-		aria-labelledby="modal-video-label">
-		<div class="modal-dialog modal-lg" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
+		<form action="">
+			<div class="form-group row p-3">
+				<label for="input-comment" class="col-lg-1 col-form-label"><a
+					href="#" class=""><img
+						src="https://www.tutorialrepublic.com/examples/images/avatar/3.jpg"
+						class="avatar px-3" alt="Avatar"></a></label>
+				<div class="col-lg-11">
+					<input type="text" class="form-control mt-2" id="input-comment"
+						placeholder="Escribe un comentario ...">
 				</div>
-				<div class="modal-body">
-					<div class="modal-video">
-						<div class="embed-responsive embed-responsive-16by9">
-							<iframe class="embed-responsive-item"
-								th:src="@{https://www.youtube.com/embed/} + ${trailer.key} + @{?enablejsapi=1}"
-								mozallowfullscreen allowfullscreen></iframe>
+				<div class="col-lg-10"></div>
+
+				<div class="col-lg-2 mt-3">
+					<button type="submit" id="publish-comment" class="btn btn-custom text-white float-right">Publicar</button>
+				</div>
+			</div>
+		</form>
+
+		<div class="row px-4">
+			<div class="col pt-3">
+				<div class="row comment p-3 mb-3">
+					<a href="#" class="p-1"><img
+						src="https://www.tutorialrepublic.com/examples/images/avatar/3.jpg"
+						class="avatar px-3" alt="Avatar"></a>
+					<div class="">
+						<span class="text-white font-weight-bold px-1">David Robles</span>
+						<p class="text-white px-1 comment-date">hace 20 min</p>
+					</div>
+					<div class="row text-white px-4 pt-2">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+						eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+						enim ad minim veniam, quis nostrud exercitation ullamco laboris
+						nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+						reprehenderit in voluptate velit esse cillum dolore eu fugiat
+						nulla pariatur.
+						<div></div>
+					</div>
+				</div>
+				<div class="row comment p-3 mb-3">
+					<a href="#" class="p-1"><img
+						src="https://www.tutorialrepublic.com/examples/images/avatar/3.jpg"
+						class="avatar px-3" alt="Avatar"></a>
+					<div class="">
+						<span class="text-white font-weight-bold px-1">David Robles</span>
+						<p class="text-white px-1 comment-date">hace 20 min</p>
+					</div>
+					<div class="row text-white px-4">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+						eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+						enim ad minim veniam, quis nostrud exercitation ullamco laboris
+						nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+						reprehenderit in voluptate velit esse cillum dolore eu fugiat
+						nulla pariatur.
+						<div></div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<!-- MODAL -->
+		<div class="modal fade" id="modal-video" tabindex="-1" role="dialog"
+			aria-labelledby="modal-video-label">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="modal-video">
+							<div class="embed-responsive embed-responsive-16by9">
+								<iframe class="embed-responsive-item"
+									th:src="@{https://www.youtube.com/embed/} + ${trailer.key} + @{?enablejsapi=1}"
+									mozallowfullscreen allowfullscreen></iframe>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
-	<!-- Bootstrap core JavaScript -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
-		integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
-		integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
-		crossorigin="anonymous"></script>
+		<!-- Bootstrap core JavaScript -->
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+			integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+			crossorigin="anonymous"></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+			integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+			crossorigin="anonymous"></script>
+		<script
+			src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+			integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+			crossorigin="anonymous"></script>
 
-	<script type="text/javascript" th:src="@{/js/movie.js}"></script>
+		<script type="text/javascript" th:src="@{/js/movie.js}"></script>
 
-	<script th:src="@{js/modernizr.custom.js}"></script>
-	<script th:src="@{js/classie.js}"></script>
-	<script th:src="@{js/modalEffects.js}"></script>
-
+		<script th:src="@{js/modernizr.custom.js}"></script>
+		<script th:src="@{js/classie.js}"></script>
+		<script th:src="@{js/modalEffects.js}"></script>
 </body>
 
 </html>
