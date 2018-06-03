@@ -60,6 +60,18 @@ public class WebController {
 		return "user/movie";
 	}
 	
+	@GetMapping("user/search")
+	public String goToProfile(@RequestParam(name = "title", required = true) String movieTitle, Model model) {
+		RestTemplate restTemplate = new RestTemplate();
+		Results response = restTemplate.getForObject(
+				"https://api.themoviedb.org/3/search/movie?api_key=9ae4cb8d6fe7e69356db23d14dd945dd&language=en-US&query=" + movieTitle + "&page=1&include_adult=false&region=US",
+				Results.class);
+		model.addAttribute("movies", response.getResults());
+		model.addAttribute("title", movieTitle);
+		model.addAttribute("size", response.getResults().size());
+		return "user/search";
+	}
+	
 	public List<Movie> removeMovieFromRecommended(Results similarMovies, String movieId) {
 		for (int i = 0; i < similarMovies.getResults().size(); i++) {
 			if (similarMovies.getResults().get(i).getId().equals(movieId)) {
