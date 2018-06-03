@@ -47,11 +47,10 @@
 						alt="Generic placeholder image"
 						style="width: 130px; height: 130px;">
 					<div class="media-body p-3">
-						<h3 class="mt-2">Mario Sánchez Melcón</h3>
-						<p class="color3">Cras sit amet nibh libero, in gravida nulla.
-							Nulla vel metus scelerisque ante sollicitudin. Fusce condimentum
-							nunc ac nisi vulputate fringilla. Donec lacinia congue felis in
-							faucibus.</p>
+						<span class="mt-4 mr-4 h3" th:text="${user.name}">UserName</span>
+						<span
+							th:text="'Member Since: ' + ${#dates.format(user.creation, 'dd-MM-yyyy')}"><small><em>Date</em></small></span>
+						<p class="color3 mt-3" th:text="${user.description}">Description.</p>
 					</div>
 				</div>
 			</div>
@@ -59,36 +58,26 @@
 				<div class="row color1 pt-2" align="center">
 					<div class="col">
 						<div>
-							<p>Peliculas vistas</p>
+							<p>Mentores</p>
 						</div>
 					</div>
-					<div class="col">
+					<!-- <div class="col">
 						<div class="">
-							<p>Amigos</p>
+							<p>Favoritas</p>
 						</div>
-					</div>
-					<div class="col">
-						<div class="">
-							<p>Horas de visionado</p>
-						</div>
-					</div>
+					</div> -->
 				</div>
 				<div class="row color2 pt-1" align="center">
 					<div class="col">
 						<div class="">
-							<p>93</p>
+							<p th:text="${#lists.size(follows)}"></p>
 						</div>
 					</div>
-					<div class="col">
+					<!-- <div class="col">
 						<div class="">
-							<p>22</p>
+							<p th:text="${#lists.size(favourites)}"></p>
 						</div>
-					</div>
-					<div class="col">
-						<div class="">
-							<p>750</p>
-						</div>
-					</div>
+					</div> -->
 				</div>
 			</div>
 
@@ -97,7 +86,7 @@
 	</div>
 
 	<div class="container">
-		<div class="row">
+		<div class="row" th:if="${sesion.id != user.id}">
 			<div class="col">
 				<button type="button"
 					class="btn btn-custom text-white float-right mt-4">Añadir
@@ -157,17 +146,113 @@
 						</div>
 					</div>
 					<div class="tab-pane text-white mt-3" id="profile" role="tabpanel"
-						aria-labelledby="profile-tab">ASDHisoaudasjdIOÑJDSAO</div>
+						aria-labelledby="profile-tab">
+						<div id="carouselExampleIndicators" class="carousel slide"
+							data-ride="carousel" data-interval="false">
+							<div class="carousel-inner">
+								<div class="carousel-item"
+									th:each="i : ${#numbers.sequence( 1, #lists.size(movies))}"
+									th:if="${iStat.count} % 7== 0"
+									th:classappend="${i} == 7 ? active">
+									<div class="row  p-4">
+										<div class="col-lg-2 col-md-2 col-sm-2 portfolio-item grow"
+											th:each="movie:${movies}" th:if="${movieStat.count} lt ${i}"
+											th:remove="${movieStat.count} lt ${i}-6? all">
+											<div class="border border-0">
+												<a th:href="'movie?id=' + ${movie.id}"><img
+													class="card-img-top round sombra"
+													th:src="@{https://image.tmdb.org/t/p/w342} + ${movie.poster_path}"
+													alt=""></a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<a class="carousel-control-prev m-0"
+								href="#carouselExampleIndicators" role="button"
+								data-slide="prev"> <span class="carousel-control-prev-icon"
+								aria-hidden="true"></span> <span class="sr-only">Previous</span>
+							</a> <a class="carousel-control-next"
+								href="#carouselExampleIndicators" role="button"
+								data-slide="next"> <span class="carousel-control-next-icon"
+								aria-hidden="true"></span> <span class="sr-only">Next</span>
+							</a>
+						</div>
+					</div>
 					<div class="tab-pane text-white mt-3" id="messages" role="tabpanel"
-						aria-labelledby="messages-tab">asodipjaiosdjifjewuiofhnwendefuhdefuih</div>
+						aria-labelledby="messages-tab">
+						<div id="carouselExampleIndicators" class="carousel slide"
+							data-ride="carousel" data-interval="false">
+							<div class="carousel-inner">
+								<div class="carousel-item"
+									th:each="i : ${#numbers.sequence( 1, #lists.size(movies))}"
+									th:if="${iStat.count} % 7== 0"
+									th:classappend="${i} == 7 ? active">
+									<div class="row  p-4">
+										<div class="col-lg-2 col-md-2 col-sm-2 portfolio-item grow"
+											th:each="movie:${movies}" th:if="${movieStat.count} lt ${i}"
+											th:remove="${movieStat.count} lt ${i}-6? all">
+											<div class="border border-0">
+												<a th:href="'movie?id=' + ${movie.id}"><img
+													class="card-img-top round sombra"
+													th:src="@{https://image.tmdb.org/t/p/w342} + ${movie.poster_path}"
+													alt=""></a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<a class="carousel-control-prev m-0"
+								href="#carouselExampleIndicators" role="button"
+								data-slide="prev"> <span class="carousel-control-prev-icon"
+								aria-hidden="true"></span> <span class="sr-only">Previous</span>
+							</a> <a class="carousel-control-next"
+								href="#carouselExampleIndicators" role="button"
+								data-slide="next"> <span class="carousel-control-next-icon"
+								aria-hidden="true"></span> <span class="sr-only">Next</span>
+							</a>
+						</div>
+					</div>
 					<div class="tab-pane text-white mt-3" id="settings" role="tabpanel"
-						aria-labelledby="settings-tab">DAsdmopasdj sdj sijdasjd</div>
+						aria-labelledby="settings-tab">
+						<div id="carouselExampleIndicators" class="carousel slide"
+							data-ride="carousel" data-interval="false">
+							<div class="carousel-inner">
+								<div class="carousel-item"
+									th:each="i : ${#numbers.sequence( 1, #lists.size(movies))}"
+									th:if="${iStat.count} % 7== 0"
+									th:classappend="${i} == 7 ? active">
+									<div class="row  p-4">
+										<div class="col-lg-2 col-md-2 col-sm-2 portfolio-item grow"
+											th:each="movie:${movies}" th:if="${movieStat.count} lt ${i}"
+											th:remove="${movieStat.count} lt ${i}-6? all">
+											<div class="border border-0">
+												<a th:href="'movie?id=' + ${movie.id}"><img
+													class="card-img-top round sombra"
+													th:src="@{https://image.tmdb.org/t/p/w342} + ${movie.poster_path}"
+													alt=""></a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<a class="carousel-control-prev m-0"
+								href="#carouselExampleIndicators" role="button"
+								data-slide="prev"> <span class="carousel-control-prev-icon"
+								aria-hidden="true"></span> <span class="sr-only">Previous</span>
+							</a> <a class="carousel-control-next"
+								href="#carouselExampleIndicators" role="button"
+								data-slide="next"> <span class="carousel-control-next-icon"
+								aria-hidden="true"></span> <span class="sr-only">Next</span>
+							</a>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- FIN CAROUSEL -->
-	
+
 	<!-- Bootstrap core JavaScript -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

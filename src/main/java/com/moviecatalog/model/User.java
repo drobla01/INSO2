@@ -21,7 +21,6 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import com.moviecatalog.model.Role;
 
-
 @Entity // This tells Hibernate to make a table out of this class
 @Table(name="user")
 public class User {
@@ -36,6 +35,8 @@ public class User {
     private String password;
 
     private String email;
+    
+    private String description;
 
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
@@ -137,5 +138,13 @@ public class User {
 
 	public void setFavourites(Set<Movie> favourites) {
 		this.favourites = favourites;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }

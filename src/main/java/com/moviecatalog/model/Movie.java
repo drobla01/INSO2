@@ -7,8 +7,6 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -26,8 +24,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Movie {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name = "movie_id")
+    @Column(name = "movie_id", nullable = false)
     private String id;
 	
 	private float vote_average;

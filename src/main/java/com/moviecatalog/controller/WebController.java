@@ -3,36 +3,32 @@ package com.moviecatalog.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.moviecatalog.model.Movie;
 import com.moviecatalog.model.Results;
+import com.moviecatalog.model.User;
 import com.moviecatalog.service.UserService;
 
 @Controller
 public class WebController {
-
+	
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping(value= {"/","/home"}, method = RequestMethod.GET)
-	public ModelAndView index(){
-		ModelAndView modelAndView = new ModelAndView();
-		RestTemplate restTemplate = new RestTemplate();
-		Results response = restTemplate.getForObject(
-				"https://api.themoviedb.org/3/discover/movie?api_key=9ae4cb8d6fe7e69356db23d14dd945dd&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1",
-				Results.class);
-
-		modelAndView.addObject("movies", response.getResults());
-		modelAndView.setViewName("home");
-		return modelAndView;
+	@ModelAttribute
+	public void addAttributes(Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByEmail(auth.getName());
+		if(user != null)
+			model.addAttribute("sesion", user);
 	}
 	
 	@RequestMapping("/user/index")
@@ -43,17 +39,6 @@ public class WebController {
 				Results.class);
 		model.addAttribute("movies", response.getResults());
 		return "user/index";
-	}
-	
-	@GetMapping("/user/social")
-	public String goToProfile(Model model) {
-		RestTemplate restTemplate = new RestTemplate();
-		Results response = restTemplate.getForObject(
-				"https://api.themoviedb.org/3/discover/movie?api_key=9ae4cb8d6fe7e69356db23d14dd945dd&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1",
-				Results.class);
-		model.addAttribute("movies", response.getResults());
-		model.addAttribute("size", response.getResults().size());
-		return "user/social";
 	}
 
 	@GetMapping("/user/movie")

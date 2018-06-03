@@ -3,6 +3,7 @@ package com.moviecatalog.service;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,12 @@ public class UserServiceImpl implements UserService{
 	
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-	
+
+    @Override
+	public User findUserById(Integer id) {
+		return userRepository.findById(id).get();
+	}
+    
 	@Override
 	public User findUserByEmail(String email) {
 		return userRepository.findByEmail(email);
@@ -33,6 +39,7 @@ public class UserServiceImpl implements UserService{
 	public void saveUser(User user) {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setActive(1);
+        user.setDescription("Hi There, Im using Cinebook.");
         
         Date date = new Date();
         user.setCreation(date);
@@ -43,5 +50,5 @@ public class UserServiceImpl implements UserService{
 		
         userRepository.save(user);
 	}
-
+	
 }

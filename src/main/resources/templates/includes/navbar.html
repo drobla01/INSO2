@@ -18,7 +18,7 @@
 					<li class="nav-item dropdown ml-4">
 				<a href="#" data-toggle="dropdown" class="nav-link  user-action p-1"><img src="https://www.tutorialrepublic.com/examples/images/avatar/3.jpg" class="avatar" alt="Avatar"></a>
 				<ul class="dropdown-menu dropdown-menu-right">
-					<li><a href="social" class="dropdown-item"><i class="fa fa-user-o"></i> Profile</a></li>
+					<li><a th:href="@{/user/social?id=} + ${sesion.id}" class="dropdown-item"><i class="fa fa-user-o"></i> Profile</a></li>
 					<li><a href="#" class="dropdown-item"><i class="fa fa-calendar-o"></i> Calendar</a></li>
 					<li><a href="#" class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a></li>
 					<li class="divider dropdown-divider"></li>
