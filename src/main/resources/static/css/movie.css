@@ -278,6 +278,12 @@ keyframes spin {to { transform:rotate(360deg);
 #publish-comment{
 	display:none;
 }
+
+.badge-custom{
+	padding: 10px;
+}
+
+
 /* 
 Extra small devices (portrait phones, less than 544px) 
 No media query since this is the default in Bootstrap because it is "mobile first"

@@ -42,14 +42,14 @@
 		<div class="row no-gutters px-3 shadow-bottom bg-custom">
 			<div class="col-lg-8">
 				<div class="media text-white">
-					<img class="m-4"
+					<img class="my-4 mx-3"
 						src="http://www.designskilz.com/random-users/images/imageM3.jpg"
 						alt="Generic placeholder image"
 						style="width: 130px; height: 130px;">
 					<div class="media-body p-3">
 						<span class="mt-4 mr-4 h3" th:text="${user.name}">UserName</span>
-						<span
-							th:text="'Member Since: ' + ${#dates.format(user.creation, 'dd-MM-yyyy')}"><small><em>Date</em></small></span>
+						<small><em> <span
+								th:text="'Member Since: ' + ${#dates.format(user.creation, 'dd-MM-yyyy')}">Date</span></em></small>
 						<p class="color3 mt-3" th:text="${user.description}">Description.</p>
 					</div>
 				</div>

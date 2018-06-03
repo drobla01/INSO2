@@ -35,7 +35,7 @@ public class WebController {
 	public String showIndex(Model model) {
 		RestTemplate restTemplate = new RestTemplate();
 		Results response = restTemplate.getForObject(
-				"https://api.themoviedb.org/3/discover/movie?api_key=9ae4cb8d6fe7e69356db23d14dd945dd&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1",
+				"https://api.themoviedb.org/3/discover/movie?api_key=9ae4cb8d6fe7e69356db23d14dd945dd&region=US&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1",
 				Results.class);
 		model.addAttribute("movies", response.getResults());
 		return "user/index";
@@ -61,14 +61,25 @@ public class WebController {
 	}
 	
 	@GetMapping("user/search")
-	public String goToProfile(@RequestParam(name = "title", required = true) String movieTitle, Model model) {
+	public String searchMovies(@RequestParam(name = "title", required = true) String movieTitle, Model model) {
 		RestTemplate restTemplate = new RestTemplate();
 		Results response = restTemplate.getForObject(
-				"https://api.themoviedb.org/3/search/movie?api_key=9ae4cb8d6fe7e69356db23d14dd945dd&language=en-US&query=" + movieTitle + "&page=1&include_adult=false&region=US",
+				"https://api.themoviedb.org/3/search/movie?api_key=9ae4cb8d6fe7e69356db23d14dd945dd&region=US&language=en-US&query=" + movieTitle + "&page=1&include_adult=false&region=US",
 				Results.class);
 		model.addAttribute("movies", response.getResults());
 		model.addAttribute("title", movieTitle);
 		model.addAttribute("size", response.getResults().size());
+		return "user/search";
+	}
+	
+	@GetMapping("user/genre")
+	public String searchGenres(@RequestParam(name = "id", required = true) String genreId,@RequestParam(name = "name", required = true) String genreName, Model model) {
+		RestTemplate restTemplate = new RestTemplate();
+		Results response = restTemplate.getForObject(
+				"https://api.themoviedb.org/3/discover/movie?api_key=9ae4cb8d6fe7e69356db23d14dd945dd&language=en-US&sort_by=popularity.desc&region=US&include_adult=false&include_video=false&page=1&with_genres="+ genreId+"",
+				Results.class);
+		model.addAttribute("movies", response.getResults());
+		model.addAttribute("title", genreName);
 		return "user/search";
 	}
 	
