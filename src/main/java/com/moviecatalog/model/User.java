@@ -36,6 +36,8 @@ public class User {
     private String password;
 
     private String email;
+    
+    private String description;
 
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
@@ -137,5 +139,17 @@ public class User {
 
 	public void setFavourites(Set<Movie> favourites) {
 		this.favourites = favourites;
+	}
+	
+	public void addFavourite(Movie movie) {
+		this.favourites.add(movie);
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }

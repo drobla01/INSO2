@@ -26,17 +26,17 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Movie {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name = "movie_id")
     private String id;
 	
 	private float vote_average;
-	
 	@Column(name = "keyy")
 	private String key;
 	private String title;
 	private String poster_path;
 	private String backdrop_path;
+	
+	@Transient
 	private String overview;
 	
 	@Transient
@@ -50,6 +50,8 @@ public class Movie {
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date release_date;
+	
+	@Transient
 	private String type;
 
 	@ManyToMany(cascade = CascadeType.ALL)

@@ -33,6 +33,7 @@ public class UserServiceImpl implements UserService{
 	public void saveUser(User user) {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setActive(1);
+        user.setDescription("Hi There, Im using Cinebook");
         
         Date date = new Date();
         user.setCreation(date);
@@ -42,6 +43,10 @@ public class UserServiceImpl implements UserService{
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
 		
         userRepository.save(user);
+	}
+	
+	public void updateUser(User user) {
+		userRepository.save(user);
 	}
 
 }

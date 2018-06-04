@@ -3,6 +3,8 @@ package com.moviecatalog.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.moviecatalog.model.Movie;
 import com.moviecatalog.model.Results;
+import com.moviecatalog.model.User;
+import com.moviecatalog.service.MovieService;
 import com.moviecatalog.service.UserService;
 
 @Controller
@@ -21,6 +25,9 @@ public class WebController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private MovieService movieService;
 	
 	@RequestMapping(value= {"/","/home"}, method = RequestMethod.GET)
 	public ModelAndView index(){
@@ -72,6 +79,36 @@ public class WebController {
 		model.addAttribute("movies", removeMovieFromRecommended(similarMovies, movie.getId()));
 		model.addAttribute("trailer", findMovieByTrailer(videos));
 		model.addAttribute("movie", movie);
+		return "user/movie";
+	}
+	
+	@GetMapping("/user/save")
+	public String saveMovie(@RequestParam(name = "id", required = true) String id, Model model) {
+		RestTemplate restTemplate = new RestTemplate();
+		Results videos = restTemplate.getForObject("https://api.themoviedb.org/3/movie/" + id
+				+ "/videos?api_key=9ae4cb8d6fe7e69356db23d14dd945dd&language=es-ES", Results.class);
+		Movie movie = restTemplate.getForObject(
+				"https://api.themoviedb.org/3/movie/" + id + "?api_key=9ae4cb8d6fe7e69356db23d14dd945dd&language=es-ES",
+				Movie.class);
+		String genres = movie.toStringGenres();
+		Results similarMovies = restTemplate.getForObject(
+				"https://api.themoviedb.org/3/discover/movie?api_key=9ae4cb8d6fe7e69356db23d14dd945dd&language=es-ES&region=US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres="
+						+ genres,
+				Results.class);
+		
+		model.addAttribute("movies", removeMovieFromRecommended(similarMovies, movie.getId()));
+		model.addAttribute("trailer", findMovieByTrailer(videos));
+		model.addAttribute("movie", movie);
+		
+		if(movieService.findById(id) == null){ //No esta en la base de datos
+			movieService.saveMovie(movie);
+		}
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    User user = userService.findUserByEmail(auth.getName());
+	    user.addFavourite(movie);
+	    userService.updateUser(user);
+		
 		return "user/movie";
 	}
 	

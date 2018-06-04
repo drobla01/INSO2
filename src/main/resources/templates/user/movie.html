@@ -81,7 +81,9 @@
 					Marcar como</button>
 				<div class="dropdown-menu dropdown-menu-center">
 					<button class="dropdown-item" type="button">Vista</button>
-					<button class="dropdown-item" type="button">Pendiente</button>
+<!-- 					<a th:href="'/user/save?id=' + ${movie.id}"> -->
+					<button class="dropdown-item" type="submit" id="pendiente">Pendiente</button>
+<!-- 					</a> -->
 					<button class="dropdown-item md-trigger" data-modal="modal-1"
 						type="button">Recomendar</button>
 				</div>
