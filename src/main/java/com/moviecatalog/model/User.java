@@ -59,6 +59,14 @@ public class User {
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "user_movie", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "movie_id"))
 	private Set<Movie> favourites;
+	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "vistas", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "movie_id"))
+	private Set<Movie> views;
+
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "pendientes", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "movie_id"))
+	private Set<Movie> pending;
     
 	public Integer getId() {
 		return id;
@@ -140,6 +148,22 @@ public class User {
 		this.favourites = favourites;
 	}
 
+	public Set<Movie> getViews() {
+		return views;
+	}
+
+	public void setViews(Set<Movie> views) {
+		this.views = views;
+	}
+
+	public Set<Movie> getPending() {
+		return pending;
+	}
+
+	public void setPending(Set<Movie> pending) {
+		this.pending = pending;
+	}
+	
 	public String getDescription() {
 		return description;
 	}
