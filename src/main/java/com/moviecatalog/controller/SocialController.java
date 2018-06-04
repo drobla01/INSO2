@@ -39,14 +39,19 @@ public class SocialController {
 		model.addAttribute("follows", user.getFollows());
 		return "user/social";
 	}
-
+	
 	@RequestMapping(value = "/user/social", method = RequestMethod.POST)
 	public ModelAndView addFriend(@RequestParam(name = "id", required = true) Integer id, Model model) {
 		ModelAndView mav = new ModelAndView(new RedirectView("/user/social", true));
 		mav.addObject("id", id);
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByEmail(auth.getName());
+		User mentor = userService.findUserById(id);
+		
+		user.getFollows().add(mentor);
+		userService.saveUser(user);
 		return mav;
-		// return "/user/social"; //return "forward:/user/social?id="+id; esta
-		// genera el bucle infinito
 	}
 
 }
