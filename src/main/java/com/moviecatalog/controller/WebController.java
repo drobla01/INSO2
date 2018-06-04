@@ -1,5 +1,6 @@
 package com.moviecatalog.controller;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,11 +80,40 @@ public class WebController {
 		model.addAttribute("movies", removeMovieFromRecommended(similarMovies, movie.getId()));
 		model.addAttribute("trailer", findMovieByTrailer(videos));
 		model.addAttribute("movie", movie);
+		
+		//Indicar si sigue la pelicula, favoritos etc
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    User user = userService.findUserByEmail(auth.getName());
+	    
+	    int favValue = 0;
+	    int viewValue = 0;
+	    int pendingValue = 0;
+	    
+	    Iterator<Movie> iterator = user.getFavourites().iterator();
+	    while(iterator.hasNext()) { 
+	    	if(iterator.next().getId().equals(id)) //El user la tiene en favs
+	    		favValue = 1;
+	    }
+	    
+	    iterator = user.getViews().iterator();
+	    while(iterator.hasNext()) 
+	     	if(iterator.next().getId().equals(id)) //El user la tiene en favs
+	      		viewValue = 1;
+	    
+	    iterator = user.getPending().iterator();
+	    while(iterator.hasNext()) 
+	      	if(iterator.next().getId().equals(id)) //El user la tiene en favs
+	      		pendingValue = 1;
+	    
+	    model.addAttribute("Fav",favValue);
+	    model.addAttribute("View",viewValue);
+	    model.addAttribute("Pending",pendingValue);
+		
 		return "user/movie";
 	}
 	
 	@GetMapping("/user/save")
-	public String saveMovie(@RequestParam(name = "id", required = true) String id, Model model) {
+	public String saveMovie(@RequestParam(name = "id", required = true) String id, Model model,String action) {
 		RestTemplate restTemplate = new RestTemplate();
 		Results videos = restTemplate.getForObject("https://api.themoviedb.org/3/movie/" + id
 				+ "/videos?api_key=9ae4cb8d6fe7e69356db23d14dd945dd&language=es-ES", Results.class);
@@ -106,10 +136,62 @@ public class WebController {
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    User user = userService.findUserByEmail(auth.getName());
-	    user.addFavourite(movie);
-	    userService.updateUser(user);
+	    
+	   if(action.equals("fav"))
+		   user.addFavourite(movie);
+	   
+	   if(action.equals("view"))
+		   user.addViews(movie);
+	   
+	   if(action.equals("pending"))
+		   user.addPending(movie);
+	   
+	   userService.updateUser(user);
 		
-		return "user/movie";
+	   return "user/movie";
+	}
+	
+	@GetMapping("/user/delete")
+	public String deleteMovie(@RequestParam(name = "id", required = true) String id, Model model,String action) {
+		RestTemplate restTemplate = new RestTemplate();
+		Results videos = restTemplate.getForObject("https://api.themoviedb.org/3/movie/" + id
+				+ "/videos?api_key=9ae4cb8d6fe7e69356db23d14dd945dd&language=es-ES", Results.class);
+		Movie movie = restTemplate.getForObject(
+				"https://api.themoviedb.org/3/movie/" + id + "?api_key=9ae4cb8d6fe7e69356db23d14dd945dd&language=es-ES",
+				Movie.class);
+		String genres = movie.toStringGenres();
+		Results similarMovies = restTemplate.getForObject(
+				"https://api.themoviedb.org/3/discover/movie?api_key=9ae4cb8d6fe7e69356db23d14dd945dd&language=es-ES&region=US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres="
+						+ genres,
+				Results.class);
+		
+		model.addAttribute("movies", removeMovieFromRecommended(similarMovies, movie.getId()));
+		model.addAttribute("trailer", findMovieByTrailer(videos));
+		model.addAttribute("movie", movie);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    User user = userService.findUserByEmail(auth.getName());
+	    
+	    if(action.equals("view")) 
+	    	for(Iterator<Movie> iterator = user.getViews().iterator(); iterator.hasNext();){ 
+	    		Movie m = iterator.next();
+	    		if(m.getId().equals(id))
+	    			iterator.remove();	
+	    	}
+	    if(action.equals("fav")) 
+	    	for(Iterator<Movie> iterator = user.getFavourites().iterator(); iterator.hasNext();){ 
+	    		Movie m = iterator.next();
+	    		if(m.getId().equals(id))
+	    			iterator.remove();	
+	    	}
+	    if(action.equals("pending")) 
+	    	for(Iterator<Movie> iterator = user.getPending().iterator(); iterator.hasNext();){ 
+	    		Movie m = iterator.next();
+	    		if(m.getId().equals(id))
+	    			iterator.remove();	
+	    	}
+	   
+	    userService.updateUser(user);
+	    return "user/movie";
 	}
 	
 	public List<Movie> removeMovieFromRecommended(Results similarMovies, String movieId) {
