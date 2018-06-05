@@ -42,7 +42,7 @@
 		<div class="row no-gutters px-3 shadow-bottom bg-custom">
 			<div class="col-lg-8">
 				<div class="media text-white">
-					<img class="my-4 mx-3"
+					<img class="mt-3 ml-2"
 						src="http://www.designskilz.com/random-users/images/imageM3.jpg"
 						alt="Generic placeholder image"
 						style="width: 130px; height: 130px;">
@@ -50,7 +50,12 @@
 						<span class="font-weight-bold mt-4 mr-4 h3" th:text="${user.name}">UserName</span>
 						<small><em> <span
 								th:text="'Member Since: ' + ${#dates.format(user.creation, 'dd-MM-yyyy')}">Date</span></em></small>
-						<p class="color3 mt-3" th:text="${user.description}">Description.</p>
+						<div>
+							<p class="color3 mt-3" th:text="${user.description}">Cras sit
+								amet nibh libero, in gravida nulla. Nulla vel metus scelerisque
+								ante sollicitudin. Fusce condimentum nunc ac nisi vulputate
+								fringilla. Donec lacinia congue felis in faucibus.</p>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -80,132 +85,132 @@
 					</div>
 				</div>
 			</div>
-
 		</div>
 
-	</div>
-
-	<div class="container">
-		<div class="row" th:if="${sesion.id != user.id}">
-			<div class="col" th:if="${!friend}">
-				<form method="POST" th:action="@{/user/social}">
-					<input type="hidden" name="id" id="id"
-						th:value="${user.id}" />
-					<button type="submit" name="submit" value="value"
-						class="btn btn-custom text-white float-right mt-4">Seguir</button>
-				</form>
+		<div class="container">
+			<div class="row" th:if="${sesion.id != user.id}">
+				<div class="col" th:if="${!friend}">
+					<form method="POST" th:action="@{/user/social}">
+						<input type="hidden" name="id" id="id" th:value="${user.id}" />
+						<button type="submit" name="submit" value="value"
+							class="btn btn-custom text-white float-right mt-4">Seguir</button>
+					</form>
+				</div>
+				<div class="col" th:if="${friend}">
+					<form method="POST" th:action="@{/user/social}">
+						<input type="hidden" name="id" id="id" th:value="${user.id}" />
+						<button type="submit" name="submit" value="value"
+							class="btn btn-custom text-white float-right mt-4">Dejar
+							de seguir</button>
+					</form>
+				</div>
 			</div>
-			<div class="col" th:if="${friend}">
-				<form method="POST" th:action="@{/user/social}">
-					<input type="hidden" name="id" id="id"
-						th:value="${user.id}" />
-					<button type="submit" name="submit" value="value"
-						class="btn btn-custom text-white float-right mt-4">Dejar de seguir</button>
-				</form>
-			</div>
-		</div>
-		<div class="row mt-3">
-			<div class="col">
-				<ul class="nav" id="myTab" role="tablist">
-					<li class="nav-item"><a class="nav-link2 active" id="home-tab"
-						data-toggle="tab" href="#home" role="tab" aria-controls="home"
-						aria-selected="true">Favoritas</a></li>
-					<li class="nav-item"><a class="nav-link2" id="profile-tab"
-						data-toggle="tab" href="#profile" role="tab"
-						aria-controls="profile" aria-selected="false">Pendientes</a></li>
-					<li class="nav-item"><a class="nav-link2" id="messages-tab"
-						data-toggle="tab" href="#messages" role="tab"
-						aria-controls="messages" aria-selected="false">Vistas</a></li>
-					<li class="nav-item"><a class="nav-link2" id="settings-tab"
-						data-toggle="tab" href="#settings" role="tab"
-						aria-controls="settings" aria-selected="false">Mentores</a></li>
-				</ul>
+			<div class="row mt-5">
+				<div class="col">
+					<ul class="nav" id="myTab" role="tablist">
+						<li class="nav-item"><a class="nav-link2 active"
+							id="home-tab" data-toggle="tab" href="#home" role="tab"
+							aria-controls="home" aria-selected="true">Favoritas</a></li>
+						<li class="nav-item"><a class="nav-link2" id="profile-tab"
+							data-toggle="tab" href="#profile" role="tab"
+							aria-controls="profile" aria-selected="false">Pendientes</a></li>
+						<li class="nav-item"><a class="nav-link2" id="messages-tab"
+							data-toggle="tab" href="#messages" role="tab"
+							aria-controls="messages" aria-selected="false">Vistas</a></li>
+						<li class="nav-item"><a class="nav-link2" id="settings-tab"
+							data-toggle="tab" href="#settings" role="tab"
+							aria-controls="settings" aria-selected="false">Mentores</a></li>
+					</ul>
 
-				<div class="tab-content">
-					<div class="tab-pane active text-white mt-3" id="home"
-						role="tabpanel" aria-labelledby="home-tab">
-						<div class="row" th:if="${#lists.size(favourites) == 0}">
-							<div class="col">
-								<a class="btn d-block align-middle text-white mt-5">Oops, no
-									sigues ninguna película.</a>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-lg-2 col-md-2 col-sm-2 col-6 portfolio-item grow"
-								th:each="movie:${favourites}">
-								<div class="border border-0">
-									<a th:href="'movie?id=' + ${movie.id}"><img
-										class="card-img-top round sombra"
-										th:src="@{https://image.tmdb.org/t/p/w342} + ${movie.poster_path}"
-										alt=""></a>
-									<!-- <p class="text-white score shadow"
-										th:text="${movie.vote_average}"></p> -->
+					<div class="tab-content mt-4">
+						<div class="tab-pane active text-white mt-3" id="home"
+							role="tabpanel" aria-labelledby="home-tab">
+							<div class="row" th:if="${#lists.size(favourites) == 0}">
+								<div class="col">
+									<a class="btn d-block align-middle text-white mt-5">Oops,
+										no sigues ninguna película.</a>
 								</div>
-								<p class="mt-2">
-									<a class="text-white" th:href="'movie?id=' + ${movie.id}"
-										th:text="${movie.title}"></a>
-								</p>
 							</div>
-						</div>
-					</div>
-					<div class="tab-pane text-white mt-3" id="profile" role="tabpanel"
-						aria-labelledby="profile-tab">
-						<div class="row" th:if="${#lists.size(pending) == 0}">
-							<div class="col">
-								<a class="btn d-block align-middle text-white mt-5">Oops,
-									aún no tienes películas pendientes.</a>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-lg-2 col-md-2 col-sm-2 col-6 portfolio-item grow"
-								th:each="movie:${pending}">
-								<div class="border border-0">
-									<a th:href="'movie?id=' + ${movie.id}"><img
-										class="card-img-top round sombra"
-										th:src="@{https://image.tmdb.org/t/p/w342} + ${movie.poster_path}"
-										alt=""></a>
-									<!-- <p class="text-white score shadow"
+							<div class="row">
+								<div
+									class="col-lg-2 col-md-2 col-sm-2 col-6 portfolio-item grow"
+									th:each="movie:${favourites}">
+									<div class="border border-0">
+										<a th:href="'movie?id=' + ${movie.id}"><img
+											class="card-img-top round sombra"
+											th:src="@{https://image.tmdb.org/t/p/w342} + ${movie.poster_path}"
+											alt=""></a>
+										<!-- <p class="text-white score shadow"
 										th:text="${movie.vote_average}"></p> -->
+									</div>
+									<p class="mt-2">
+										<a class="text-white" th:href="'movie?id=' + ${movie.id}"
+											th:text="${movie.title}"></a>
+									</p>
 								</div>
-								<p class="mt-2">
-									<a class="text-white" th:href="'movie?id=' + ${movie.id}"
-										th:text="${movie.title}"></a>
-								</p>
 							</div>
 						</div>
-					</div>
-					<div class="tab-pane text-white mt-3" id="messages" role="tabpanel"
-						aria-labelledby="messages-tab">
-						<div class="row" th:if="${#lists.size(views) == 0}">
-							<div class="col">
-								<a class="btn d-block align-middle text-white mt-5">Oops,
-									aún no has marcado ninguna película como vista.</a>
+						<div class="tab-pane text-white mt-3" id="profile" role="tabpanel"
+							aria-labelledby="profile-tab">
+							<div class="row" th:if="${#lists.size(pending) == 0}">
+								<div class="col">
+									<a class="btn d-block align-middle text-white mt-5">Oops,
+										aún no tienes películas pendientes.</a>
+								</div>
 							</div>
-						</div>
-						<div class="row">
-							<div class="col-lg-2 col-md-2 col-sm-2 col-6 portfolio-item grow"
-								th:each="movie:${views}">
-								<div class="border border-0">
-									<a th:href="'movie?id=' + ${movie.id}"><img
-										class="card-img-top round sombra"
-										th:src="@{https://image.tmdb.org/t/p/w342} + ${movie.poster_path}"
-										alt=""></a>
-									<!-- <p class="text-white score shadow"
+							<div class="row">
+								<div
+									class="col-lg-2 col-md-2 col-sm-2 col-6 portfolio-item grow"
+									th:each="movie:${pending}">
+									<div class="border border-0">
+										<a th:href="'movie?id=' + ${movie.id}"><img
+											class="card-img-top round sombra"
+											th:src="@{https://image.tmdb.org/t/p/w342} + ${movie.poster_path}"
+											alt=""></a>
+										<!-- <p class="text-white score shadow"
 										th:text="${movie.vote_average}"></p> -->
+									</div>
+									<p class="mt-2">
+										<a class="text-white" th:href="'movie?id=' + ${movie.id}"
+											th:text="${movie.title}"></a>
+									</p>
 								</div>
-								<p class="mt-2">
-									<a class="text-white" th:href="'movie?id=' + ${movie.id}"
-										th:text="${movie.title}"></a>
-								</p>
 							</div>
 						</div>
-					</div>
-					<div class="tab-pane text-white mt-3" id="settings" role="tabpanel"
-						aria-labelledby="settings-tab">
-						<div class="row" th:if="${#lists.size(views) == 0}">
-							<div class="col">
-								<a class="btn d-block align-middle text-white mt-5">Prueba
-									añadiendo algún amigo!</a>
+						<div class="tab-pane text-white mt-3" id="messages"
+							role="tabpanel" aria-labelledby="messages-tab">
+							<div class="row" th:if="${#lists.size(views) == 0}">
+								<div class="col">
+									<a class="btn d-block align-middle text-white mt-5">Oops,
+										aún no has marcado ninguna película como vista.</a>
+								</div>
+							</div>
+							<div class="row">
+								<div
+									class="col-lg-2 col-md-2 col-sm-2 col-6 portfolio-item grow"
+									th:each="movie:${views}">
+									<div class="border border-0">
+										<a th:href="'movie?id=' + ${movie.id}"><img
+											class="card-img-top round sombra"
+											th:src="@{https://image.tmdb.org/t/p/w342} + ${movie.poster_path}"
+											alt=""></a>
+										<!-- <p class="text-white score shadow"
+										th:text="${movie.vote_average}"></p> -->
+									</div>
+									<p class="mt-2">
+										<a class="text-white" th:href="'movie?id=' + ${movie.id}"
+											th:text="${movie.title}"></a>
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="tab-pane text-white mt-3" id="settings"
+							role="tabpanel" aria-labelledby="settings-tab">
+							<div class="row" th:if="${#lists.size(views) == 0}">
+								<div class="col">
+									<a class="btn d-block align-middle text-white mt-5">Prueba
+										añadiendo algún amigo!</a>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -229,7 +234,6 @@
 		crossorigin="anonymous"></script>
 
 	<script type="text/javascript" href="../js/social.js}"></script>
-
 </body>
 
 </html>

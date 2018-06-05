@@ -28,6 +28,9 @@ public class WebController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private MovieService movieService;
+	
 	@ModelAttribute
 	public void addAttributes(Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -130,7 +133,7 @@ public class WebController {
 		if (action.equals("pending"))
 			user.addPending(movie);
 
-		userService.updateUser(user);
+		userService.update(user);
 
 		ModelAndView mav = new ModelAndView(new RedirectView("/user/movie", true));
 		mav.addObject("id", id);
@@ -150,7 +153,7 @@ public class WebController {
 		if (action.equals("pending"))
 			removeFromList(id, user.getPending());
 
-		userService.updateUser(user);
+		userService.update(user);
 
 		ModelAndView mav = new ModelAndView(new RedirectView("/user/movie", true));
 		mav.addObject("id", id);

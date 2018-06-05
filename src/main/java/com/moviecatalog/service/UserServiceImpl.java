@@ -27,6 +27,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void update(User user) {
+    	System.out.println(user.getPassword());
     	userRepository.save(user);
     }
     
@@ -54,10 +55,6 @@ public class UserServiceImpl implements UserService{
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
 		
         userRepository.save(user);
-	}
-	
-	public void updateUser(User user) {
-		userRepository.save(user);
 	}
 
 }
