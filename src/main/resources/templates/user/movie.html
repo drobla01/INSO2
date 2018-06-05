@@ -9,7 +9,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>4 Col Portfolio - Start Bootstrap Template</title>
+<title>Cinebook</title>
 
 <!-- Bootstrap core CSS -->
 <link rel="stylesheet"
@@ -35,7 +35,6 @@
 
 <body>
 
-	<!-- Navigation-->
 	<th:block th:include="includes/navbar :: navbar"></th:block>
 
 	<div class="full-width-image"
@@ -115,12 +114,17 @@
 
 	<div class="container bg-custom shadow-bottom mt-3">
 		<div class="row p-3 bg-custom2">
-			<div class="col-lg-10 col" style="color: #00C1C9">
+			<div class="col-lg-2" style="color: #00C1C9">
 				<i class="far fa-clock pr-1"></i> <span class="text-white"
 					th:text="${movie.runtime}"></span><span class="text-white">
 					min</span>
 			</div>
-			<div class="col-lg-2 col">
+			<div class="col-lg-8">
+				<span th:each="genre:${movie.genres}">
+				<a th:href="@{/user/genre?id=} + ${genre.id} +@{&name=} + ${genre.name}" class="badge badge-light badge-custom mr-2" th:text="${genre.name}">Light</a>
+				</span>
+			</div>
+			<div class="col-lg-2 ">
 				<i class="fas fa-star fa-sm pr-1" style="color: #00C1C9"></i> <span
 					class="score-bg" th:text="${movie.vote_average}"></span>
 
@@ -257,6 +261,76 @@
 				<!-- FIN CAROUSEL -->
 			</div>
 		</div>
+
+		<div class="row py-2">
+			<div class="col">
+				<h3 class="text-white font-weight-bold px-4">Comentarios</h3>
+			</div>
+		</div>
+
+		<form action="">
+			<div class="form-group row p-3">
+				<label for="input-comment" class="col-lg-1 col-form-label"><a
+					href="#" class=""><img
+						src="https://www.tutorialrepublic.com/examples/images/avatar/3.jpg"
+						class="avatar px-3" alt="Avatar"></a></label>
+				<div class="col-lg-11">
+					<input type="text" class="form-control mt-2" id="input-comment"
+						placeholder="Escribe un comentario ...">
+				</div>
+				<div class="col-lg-10"></div>
+
+				<div class="col-lg-2 mt-3">
+					<button type="submit" id="publish-comment"
+						class="btn btn-custom text-white float-right">Publicar</button>
+				</div>
+			</div>
+
+		</form>
+
+
+		<div class="row px-4">
+			<div class="col pt-3">
+				<div class="row comment p-3 mb-3">
+					<a href="#" class="p-1"><img
+						src="https://www.tutorialrepublic.com/examples/images/avatar/3.jpg"
+						class="avatar px-3" alt="Avatar"></a>
+					<div class="">
+						<span class="text-white font-weight-bold px-1">David Robles</span>
+						<p class="text-white px-1 comment-date">hace 20 min</p>
+					</div>
+					<div class="row text-white px-4 pt-2">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+						eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+						enim ad minim veniam, quis nostrud exercitation ullamco laboris
+						nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+						reprehenderit in voluptate velit esse cillum dolore eu fugiat
+						nulla pariatur.
+						<div></div>
+					</div>
+				</div>
+				<div class="row comment p-3 mb-3">
+					<a href="#" class="p-1"><img
+						src="https://www.tutorialrepublic.com/examples/images/avatar/3.jpg"
+						class="avatar px-3" alt="Avatar"></a>
+					<div class="">
+						<span class="text-white font-weight-bold px-1">David Robles</span>
+						<p class="text-white px-1 comment-date">hace 20 min</p>
+					</div>
+					<div class="row text-white px-4">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+						eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+						enim ad minim veniam, quis nostrud exercitation ullamco laboris
+						nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+						reprehenderit in voluptate velit esse cillum dolore eu fugiat
+						nulla pariatur.
+						<div></div>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
 	</div>
 
 
@@ -283,6 +357,9 @@
 			</div>
 		</div>
 	</div>
+
+
+
 
 	<!-- Bootstrap core JavaScript -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

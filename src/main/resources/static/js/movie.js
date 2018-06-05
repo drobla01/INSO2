@@ -21,4 +21,9 @@ $(document).ready(function() {
 	        modal.style.display = "none";
 	    }
 	}
+	
+    $("#input-comment").click(function(){
+        $("#publish-comment").show();
+    });
+	
 });

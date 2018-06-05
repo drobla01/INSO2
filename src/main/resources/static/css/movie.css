@@ -262,6 +262,27 @@ keyframes spin {to { transform:rotate(360deg);
 	border-radius:5px 5px 0 0;
 }
 
+.comment{
+	border-radius: 5px;
+	background-color:#3F5063;
+}
+.comment-date{
+	
+	font-size:13px;
+}
+
+.avatar{
+	border-radius: 100%;	
+}
+
+#publish-comment{
+	display:none;
+}
+
+.badge-custom{
+	padding: 10px;
+}
+
 
 /* 
 Extra small devices (portrait phones, less than 544px) 

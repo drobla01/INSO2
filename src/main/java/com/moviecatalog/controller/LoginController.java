@@ -7,8 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.moviecatalog.model.Results;
 import com.moviecatalog.model.User;
 import com.moviecatalog.service.UserService;
 
@@ -17,6 +19,19 @@ public class LoginController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@RequestMapping(value= {"/","/home"}, method = RequestMethod.GET)
+	public ModelAndView index(){
+		ModelAndView modelAndView = new ModelAndView();
+		RestTemplate restTemplate = new RestTemplate();
+		Results response = restTemplate.getForObject(
+				"https://api.themoviedb.org/3/discover/movie?api_key=9ae4cb8d6fe7e69356db23d14dd945dd&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1",
+				Results.class);
+
+		modelAndView.addObject("movies", response.getResults());
+		modelAndView.setViewName("home");
+		return modelAndView;
+	}
 	
 	@RequestMapping(value="/login", method = RequestMethod.GET)
 	public ModelAndView login(){

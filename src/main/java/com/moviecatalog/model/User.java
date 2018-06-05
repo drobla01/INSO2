@@ -21,7 +21,6 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import com.moviecatalog.model.Role;
 
-
 @Entity // This tells Hibernate to make a table out of this class
 @Table(name="user")
 public class User {
