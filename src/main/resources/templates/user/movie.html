@@ -80,25 +80,29 @@
 					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					Marcar como</button>
 				<div class="dropdown-menu dropdown-menu-center">
+					<!-- SE MUESTRA UNA U OTRA DEPENDIENDO DE SI YA LA SIGUE O NO FAV O NO... -->
 					<a th:if="${View} == false" th:href="'/user/save?id=' + ${movie.id} +'&action=view'">
 						<button class="dropdown-item" type="button">Vista<i class="fas pl-3 fa-check"></i></button>
 					</a>
+					
+					<a th:if="${View} == true" th:href="'/user/delete?id=' + ${movie.id} +'&action=view'">
+						<button class="dropdown-item" type="button">Vista<i class="fas pl-3 fa-times"></i></button>
+					</a>
+					
  					<a th:if="${Fav} == false" th:href="'/user/save?id=' + ${movie.id} +'&action=fav'">
 						<button class="dropdown-item" type="button" id="pendiente">
 						Favorita<i class="pl-3 fas fa-check"></i></button>
  					</a> 
- 					<a th:if="${Pending} == false" th:href="'/user/save?id=' + ${movie.id} +'&action=pending'">
-						<button class="dropdown-item md-trigger" data-modal="modal-1"
-							type="button">Pendiente<i class="pl-3 fas fa-check"></i></button>
-					</a>
-					<!-- SE MUESTRA UNA U OTRA DEPENDIENDO DE SI YA LA SIGUE O NO FAV O NO... -->
-					<a th:if="${View} == true" th:href="'/user/delete?id=' + ${movie.id} +'&action=view'">
-						<button class="dropdown-item" type="button">Vista<i class="fas pl-3 fa-times"></i></button>
-					</a>
+ 					
  					<a th:if="${Fav} == true" th:href="'/user/delete?id=' + ${movie.id} +'&action=fav'">
 						<button class="dropdown-item" type="button" id="pendiente">
 						Favorita<i class="pl-3 fas fa-times"></i></button>
  					</a> 
+ 					
+ 					<a th:if="${Pending} == false" th:href="'/user/save?id=' + ${movie.id} +'&action=pending'">
+						<button class="dropdown-item md-trigger" data-modal="modal-1"
+							type="button">Pendiente<i class="pl-3 fas fa-check"></i></button>
+					</a>
  					<a th:if="${Pending} == true" th:href="'/user/delete?id=' + ${movie.id} +'&action=pending'">
 						<button class="dropdown-item md-trigger" data-modal="modal-1"
 							type="button">Pendiente<i class="pl-3 fas fa-times"></i></button>
