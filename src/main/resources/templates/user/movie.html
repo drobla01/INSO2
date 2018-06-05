@@ -80,10 +80,33 @@
 					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					Marcar como</button>
 				<div class="dropdown-menu dropdown-menu-center">
-					<button class="dropdown-item" type="button">Vista</button>
-					<button class="dropdown-item" type="button">Pendiente</button>
-					<button class="dropdown-item md-trigger" data-modal="modal-1"
-						type="button">Recomendar</button>
+					<!-- SE MUESTRA UNA U OTRA DEPENDIENDO DE SI YA LA SIGUE O NO FAV O NO... -->
+					<a th:if="${View} == false" th:href="'/user/save?id=' + ${movie.id} +'&action=view'">
+						<button class="dropdown-item" type="button">Vista<i class="fas pl-3 fa-check"></i></button>
+					</a>
+					
+					<a th:if="${View} == true" th:href="'/user/delete?id=' + ${movie.id} +'&action=view'">
+						<button class="dropdown-item" type="button">Vista<i class="fas pl-3 fa-times"></i></button>
+					</a>
+					
+ 					<a th:if="${Fav} == false" th:href="'/user/save?id=' + ${movie.id} +'&action=fav'">
+						<button class="dropdown-item" type="button" id="pendiente">
+						Favorita<i class="pl-3 fas fa-check"></i></button>
+ 					</a> 
+ 					
+ 					<a th:if="${Fav} == true" th:href="'/user/delete?id=' + ${movie.id} +'&action=fav'">
+						<button class="dropdown-item" type="button" id="pendiente">
+						Favorita<i class="pl-3 fas fa-times"></i></button>
+ 					</a> 
+ 					
+ 					<a th:if="${Pending} == false" th:href="'/user/save?id=' + ${movie.id} +'&action=pending'">
+						<button class="dropdown-item md-trigger" data-modal="modal-1"
+							type="button">Pendiente<i class="pl-3 fas fa-check"></i></button>
+					</a>
+ 					<a th:if="${Pending} == true" th:href="'/user/delete?id=' + ${movie.id} +'&action=pending'">
+						<button class="dropdown-item md-trigger" data-modal="modal-1"
+							type="button">Pendiente<i class="pl-3 fas fa-times"></i></button>
+					</a>
 				</div>
 			</div>
 		</div>
@@ -274,11 +297,10 @@
 		integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
 		crossorigin="anonymous"></script>
 
-	<script type="text/javascript" th:src="@{/js/movie.js}"></script>
-
 	<script th:src="@{js/modernizr.custom.js}"></script>
 	<script th:src="@{js/classie.js}"></script>
 	<script th:src="@{js/modalEffects.js}"></script>
+	<script type="text/javascript" th:src="@{/js/movie.js}"></script>
 
 </body>
 

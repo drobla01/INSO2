@@ -7,5 +7,5 @@ import com.moviecatalog.model.Movie;
 
 @Repository("movieRepository")
 public interface MovieRepository extends JpaRepository<Movie, Integer>{
-
+	Movie findById(String id);
 }
