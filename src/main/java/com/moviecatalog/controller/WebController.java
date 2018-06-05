@@ -1,5 +1,6 @@
 package com.moviecatalog.controller;
 
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -11,14 +12,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
+
+import com.moviecatalog.model.Comment;
 import com.moviecatalog.model.Movie;
 import com.moviecatalog.model.Results;
 import com.moviecatalog.model.User;
+import com.moviecatalog.service.CommentService;
 import com.moviecatalog.service.MovieService;
 import com.moviecatalog.service.UserService;
 
@@ -30,6 +36,9 @@ public class WebController {
 	
 	@Autowired
 	private MovieService movieService;
+	
+	@Autowired
+	private CommentService commentService;
 	
 	@ModelAttribute
 	public void addAttributes(Model model) {
@@ -57,6 +66,10 @@ public class WebController {
 		Movie movie = restTemplate.getForObject(
 				"https://api.themoviedb.org/3/movie/" + id + "?api_key=9ae4cb8d6fe7e69356db23d14dd945dd&language=es-ES",
 				Movie.class);
+		if (movieService.findById(id) == null) { // No esta en la base de datos
+			movieService.saveMovie(movie);
+		}
+
 		String genres = movie.toStringGenres();
 		Results similarMovies = restTemplate.getForObject(
 				"https://api.themoviedb.org/3/discover/movie?api_key=9ae4cb8d6fe7e69356db23d14dd945dd&language=es-ES&region=US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres="
@@ -65,14 +78,19 @@ public class WebController {
 		model.addAttribute("movies", removeMovieFromRecommended(similarMovies, movie.getId()));
 		model.addAttribute("trailer", findMovieByTrailer(videos));
 		model.addAttribute("movie", movie);
+		
+		System.out.println(movieService.findById(id).getComments());
+		movieService.findById(id).getComments().size();
+		if(movieService.findById(id).getComments().size() > 0)
+			model.addAttribute("comments", movieService.findById(id).getComments());
 
-		// Indicar si sigue la pelicula, favoritos etc
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());
 
 		model.addAttribute("Fav", isMovieOnList(id, user.getFavourites()));
 		model.addAttribute("View", isMovieOnList(id, user.getViews()));
 		model.addAttribute("Pending", isMovieOnList(id, user.getPending()));
+		model.addAttribute(user);
 
 		return "user/movie";
 	}
@@ -117,21 +135,21 @@ public class WebController {
 				"https://api.themoviedb.org/3/movie/" + id + "?api_key=9ae4cb8d6fe7e69356db23d14dd945dd&language=es-ES",
 				Movie.class);
 
-		if (movieService.findById(id) == null) { // No esta en la base de datos
-			movieService.saveMovie(movie);
-		}
-
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());
 
 		if (action.equals("fav"))
-			user.addFavourite(movie);
+			user.addFavourite(movieService.findById(id));
 
-		if (action.equals("view"))
-			user.addViews(movie);
+		if (action.equals("view")) {
+			user.addViews(movieService.findById(id));
+			removeFromList(id, user.getPending());
+		}
 
-		if (action.equals("pending"))
-			user.addPending(movie);
+		if (action.equals("pending")) {
+			user.addPending(movieService.findById(id));
+			removeFromList(id, user.getViews());
+		}
 
 		userService.update(user);
 
@@ -158,6 +176,36 @@ public class WebController {
 		ModelAndView mav = new ModelAndView(new RedirectView("/user/movie", true));
 		mav.addObject("id", id);
 
+		return mav;
+	}
+	
+	@RequestMapping(value = "/user/comment", method = RequestMethod.POST)
+	public ModelAndView createComment(@RequestParam(name = "id", required = true) String id, @RequestParam(name = "input-comment", required = false) String message, Model model) {
+		RestTemplate restTemplate = new RestTemplate();
+		Movie movie = restTemplate.getForObject(
+				"https://api.themoviedb.org/3/movie/" + id + "?api_key=9ae4cb8d6fe7e69356db23d14dd945dd&language=es-ES",
+				Movie.class);
+
+		if (movieService.findById(id) == null) { // No esta en la base de datos
+			movieService.saveMovie(movie);
+		} //El usuario podría comentar sin haberla marcado por lo que no estaría en la DB
+
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByEmail(auth.getName());
+		
+		Movie mappedM = movieService.findById(id);
+		Comment comment = new Comment();
+		Date date = new Date();
+		comment.setAuthor(user);
+		comment.setComment(message);
+		comment.setCreated(date);
+		commentService.saveComment(comment);
+		
+		mappedM.addComment(comment);
+		movieService.saveMovie(mappedM);
+		
+		ModelAndView mav = new ModelAndView(new RedirectView("/user/movie", true));
+		mav.addObject("id", id);
 		return mav;
 	}
 

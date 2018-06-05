@@ -1,6 +1,7 @@
 package com.moviecatalog.model;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -17,6 +18,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
 
 @Entity
 @Table(name="movie")
@@ -54,7 +56,7 @@ public class Movie {
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "movie_comment", joinColumns = @JoinColumn(name = "movie_id"), inverseJoinColumns = @JoinColumn(name = "comment_id"))
-	private Set<Comment> comments;
+	private Set<Comment> comments = new HashSet<Comment>();
 	
 	public String getId() {
 		return id;
@@ -172,6 +174,10 @@ public class Movie {
 
 	public void setComments(Set<Comment> comments) {
 		this.comments = comments;
+	}
+	
+	public void addComment(Comment comment) {
+		this.comments.add(comment);
 	}
 	
 }
