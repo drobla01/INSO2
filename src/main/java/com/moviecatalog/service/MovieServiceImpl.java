@@ -1,15 +1,9 @@
 package com.moviecatalog.service;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashSet;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.moviecatalog.model.Movie;
-import com.moviecatalog.model.Role;
-import com.moviecatalog.model.User;
 import com.moviecatalog.repository.MovieRepository;
 
 @Service("movieService")
