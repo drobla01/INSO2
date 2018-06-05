@@ -26,6 +26,11 @@ public class UserServiceImpl implements UserService{
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
+    public void update(User user) {
+    	userRepository.save(user);
+    }
+    
+    @Override
 	public User findUserById(Integer id) {
 		return userRepository.findById(id).get();
 	}
@@ -42,7 +47,7 @@ public class UserServiceImpl implements UserService{
         user.setDescription("Hi There, Im using Cinebook.");
         
         Date date = new Date();
-        user.setCreation(date);
+        user.setCreation(date);	
         user.setUpdated(date);
         
         Role userRole = roleRepository.findByRole("USER");

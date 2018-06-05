@@ -87,13 +87,20 @@
 
 	<div class="container">
 		<div class="row" th:if="${sesion.id != user.id}">
-			<div class="col">
+			<div class="col" th:if="${!friend}">
 				<form method="POST" th:action="@{/user/social}">
 					<input type="hidden" name="id" id="id"
 						th:value="${user.id}" />
 					<button type="submit" name="submit" value="value"
-						class="btn btn-custom text-white float-right mt-4">Añadir
-						amigo</button>
+						class="btn btn-custom text-white float-right mt-4">Seguir</button>
+				</form>
+			</div>
+			<div class="col" th:if="${friend}">
+				<form method="POST" th:action="@{/user/social}">
+					<input type="hidden" name="id" id="id"
+						th:value="${user.id}" />
+					<button type="submit" name="submit" value="value"
+						class="btn btn-custom text-white float-right mt-4">Dejar de seguir</button>
 				</form>
 			</div>
 		</div>

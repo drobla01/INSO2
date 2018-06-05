@@ -32,25 +32,42 @@ public class SocialController {
 	@RequestMapping(value = "/user/social", method = RequestMethod.GET)
 	public String goToProfile(@RequestParam(name = "id", required = true) Integer id, Model model) {
 		User user = userService.findUserById(id);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User session = userService.findUserByEmail(auth.getName());
 		model.addAttribute("user", user);
 		model.addAttribute("favourites", user.getFavourites());
 		model.addAttribute("pending", user.getPending());
 		model.addAttribute("views", user.getViews());
-		model.addAttribute("follows", user.getFollows());
+		model.addAttribute("follows", user.getFollows());	
+		for (User mentor : session.getFollows()) {
+			if(mentor.getId() == user.getId()) {
+				model.addAttribute("friend", true);
+				return "user/social";
+			}
+		}
+		model.addAttribute("friend", false);
 		return "user/social";
 	}
-	
+
 	@RequestMapping(value = "/user/social", method = RequestMethod.POST)
 	public ModelAndView addFriend(@RequestParam(name = "id", required = true) Integer id, Model model) {
 		ModelAndView mav = new ModelAndView(new RedirectView("/user/social", true));
 		mav.addObject("id", id);
-		
+
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());
 		User mentor = userService.findUserById(id);
+
+		for (User mentors : user.getFollows()) {
+			if(mentors.getId() == mentor.getId()) {
+				user.getFollows().remove(mentors);
+				userService.update(user);
+				return mav;
+			}
+		}
 		
 		user.getFollows().add(mentor);
-		userService.saveUser(user);
+		userService.update(user);
 		return mav;
 	}
 
