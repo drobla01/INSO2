@@ -37,6 +37,8 @@ public class User {
     private String email;
     
     private String description;
+    
+    private String photo;
 
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
@@ -182,5 +184,13 @@ public class User {
 
 	public void setPending(Set<Movie> pending) {
 		this.pending = pending;
+	}
+	
+	public void setPhoto(String path) {
+		this.photo = path;
+	}
+	
+	public String getPhoto() {
+		return this.photo;
 	}
 }

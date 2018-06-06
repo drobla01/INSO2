@@ -272,7 +272,7 @@
 			<div class="form-group row p-3">
 				<label for="input-comment" class="col-lg-1 col-form-label"><a
 					href="#" class=""><img
-						src="https://www.tutorialrepublic.com/examples/images/avatar/3.jpg"
+						th:src="${user.photo}"
 						class="avatar px-3" alt="Avatar"></a></label>
 				<div class="col-lg-11">
 					<input type="hidden" name="id" id="id" th:value="${movie.id}">
@@ -293,7 +293,7 @@
 			<div class="col pt-3">
 				<div class="row comment p-3 mb-3" th:each="comment:${comments}">
 					<a th:href="@{/user/social?id=} + ${comment.author.id}" class="p-1"><img
-						src="https://www.tutorialrepublic.com/examples/images/avatar/3.jpg"
+						th:src="${comment.author.photo}"
 						class="avatar px-3" alt="Avatar"></a>
 					<div class="">
 						<span class="text-white font-weight-bold px-1" th:text="${comment.author.name}">David Robles</span>

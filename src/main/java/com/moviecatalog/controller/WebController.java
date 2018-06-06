@@ -55,6 +55,9 @@ public class WebController {
 				"https://api.themoviedb.org/3/discover/movie?api_key=9ae4cb8d6fe7e69356db23d14dd945dd&region=US&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1",
 				Results.class);
 		model.addAttribute("movies", response.getResults());
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByEmail(auth.getName());
+		model.addAttribute("user", user);
 		return "user/index";
 	}
 

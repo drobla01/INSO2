@@ -52,7 +52,8 @@ public class UserServiceImpl implements UserService{
         
         Role userRole = roleRepository.findByRole("USER");
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
-		
+        user.setPhoto("https://ui-avatars.com/api/?rounded=true&size=52&font-size=0.4&name=" + user.getName());
+        
         userRepository.save(user);
 	}
 
