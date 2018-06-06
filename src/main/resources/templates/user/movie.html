@@ -80,31 +80,33 @@
 					Marcar como</button>
 				<div class="dropdown-menu dropdown-menu-center">
 					<!-- SE MUESTRA UNA U OTRA DEPENDIENDO DE SI YA LA SIGUE O NO FAV O NO... -->
-					<a th:if="${View} == false" th:href="'/user/save?id=' + ${movie.id} +'&action=view'">
+					<a th:if="${View} == false"
+						th:href="'/user/save?id=' + ${movie.id} +'&action=view'">
 						<button class="dropdown-item" type="button">Vista</button>
-					</a>
-					
-					<a th:if="${View} == true" th:href="'/user/delete?id=' + ${movie.id} +'&action=view'">
-						<button class="dropdown-item" type="button">Vista<i class="fas pl-3 fa-check"></i></button>
-					</a>
-					
- 					<a th:if="${Fav} == false" th:href="'/user/save?id=' + ${movie.id} +'&action=fav'">
+					</a> <a th:if="${View} == true"
+						th:href="'/user/delete?id=' + ${movie.id} +'&action=view'">
+						<button class="dropdown-item" type="button">
+							Vista<i class="fas pl-3 fa-check"></i>
+						</button>
+					</a> <a th:if="${Fav} == false"
+						th:href="'/user/save?id=' + ${movie.id} +'&action=fav'">
 						<button class="dropdown-item" type="button" id="pendiente">
-						Favorita</button>
- 					</a> 
- 					
- 					<a th:if="${Fav} == true" th:href="'/user/delete?id=' + ${movie.id} +'&action=fav'">
+							Favorita</button>
+					</a> <a th:if="${Fav} == true"
+						th:href="'/user/delete?id=' + ${movie.id} +'&action=fav'">
 						<button class="dropdown-item" type="button" id="pendiente">
-						Favorita<i class="pl-3 fas fa-check"></i></button>
- 					</a> 
- 					
- 					<a th:if="${Pending} == false" th:href="'/user/save?id=' + ${movie.id} +'&action=pending'">
+							Favorita<i class="pl-3 fas fa-check"></i>
+						</button>
+					</a> <a th:if="${Pending} == false"
+						th:href="'/user/save?id=' + ${movie.id} +'&action=pending'">
 						<button class="dropdown-item md-trigger" data-modal="modal-1"
 							type="button">Pendiente</button>
-					</a>
- 					<a th:if="${Pending} == true" th:href="'/user/delete?id=' + ${movie.id} +'&action=pending'">
+					</a> <a th:if="${Pending} == true"
+						th:href="'/user/delete?id=' + ${movie.id} +'&action=pending'">
 						<button class="dropdown-item md-trigger" data-modal="modal-1"
-							type="button">Pendiente<i class="pl-3 fas fa-check"></i></button>
+							type="button">
+							Pendiente<i class="pl-3 fas fa-check"></i>
+						</button>
 					</a>
 				</div>
 			</div>
@@ -120,8 +122,9 @@
 					min</span>
 			</div>
 			<div class="col-lg-8">
-				<span th:each="genre:${movie.genres}">
-				<a th:href="@{/user/genre?id=} + ${genre.id} +@{&name=} + ${genre.name}" class="badge badge-light badge-custom mr-2" th:text="${genre.name}">Light</a>
+				<span th:each="genre:${movie.genres}"> <a
+					th:href="@{/user/genre?id=} + ${genre.id} +@{&name=} + ${genre.name}"
+					class="badge badge-light badge-custom mr-2" th:text="${genre.name}">Light</a>
 				</span>
 			</div>
 			<div class="col-lg-2 ">
@@ -267,17 +270,17 @@
 				<h3 class="text-white font-weight-bold px-4">Comentarios</h3>
 			</div>
 		</div>
-
 		<form method="POST" th:action="@{/user/comment}">
-			<div class="form-group row p-3">
-				<label for="input-comment" class="col-lg-1 col-form-label"><a
-					href="#" class=""><img
-						th:src="${user.photo}"
-						class="avatar px-3" alt="Avatar"></a></label>
+			<div class="form-group row px-4 mt-3">
+				<div class="col-lg-1">
+					<label for="input-comment" class="col-lg-1 col-form-label"><a
+						href="#" class=""><img th:src="${user.photo}" class="avatar"
+							alt="Avatar"></a></label>
+				</div>
 				<div class="col-lg-11">
 					<input type="hidden" name="id" id="id" th:value="${movie.id}">
-					<input type="text" class="form-control mt-2" id="input-comment" name="input-comment"
-						placeholder="Escribe un comentario ...">
+					<input type="text" class="form-control mt-2" id="input-comment"
+						name="input-comment" placeholder="Escribe un comentario ...">
 				</div>
 				<div class="col-lg-10"></div>
 
@@ -288,16 +291,19 @@
 			</div>
 		</form>
 
-
 		<div class="row px-4">
 			<div class="col pt-3">
-				<div class="row comment p-3 mb-3" th:each="comment:${comments}">
-					<a th:href="@{/user/social?id=} + ${comment.author.id}" class="p-1"><img
-						th:src="${comment.author.photo}"
-						class="avatar px-3" alt="Avatar"></a>
-					<div class="">
-						<span class="text-white font-weight-bold px-1" th:text="${comment.author.name}">David Robles</span>
-						<p class="text-white px-1 comment-date" th:text="${comment.created}">hace 20 min</p>
+				<div class="comment p-4 mb-3" th:each="comment:${comments}">
+					<div class="row px-4">
+						<a th:href="@{/user/social?id=} + ${comment.author.id}"
+							class="p-1"><img th:src="${comment.author.photo}"
+							class="avatar" alt="Avatar"></a>
+						<div class="ml-2">
+							<span class="text-white font-weight-bold px-1"
+								th:text="${comment.author.name}">David Robles</span>
+							<p class="text-white px-1 comment-date"
+								th:text="${comment.created}">hace 20 min</p>
+						</div>
 					</div>
 					<div class="row text-white px-4 pt-2">
 						<p th:text="${comment.comment}"></p>

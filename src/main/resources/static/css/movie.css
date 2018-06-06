@@ -165,6 +165,8 @@ keyframes spin {to { transform:rotate(360deg);
 	}
 }
 
+
+
 .round {
 	border-radius: 10px;
 	filter: brightness(90%);
@@ -276,6 +278,8 @@ keyframes spin {to { transform:rotate(360deg);
 	width: 36px;
 	height: 36px;
 }
+
+
 
 #publish-comment{
 	display:none;
