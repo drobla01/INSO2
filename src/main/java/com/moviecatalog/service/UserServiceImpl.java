@@ -1,8 +1,10 @@
 package com.moviecatalog.service;
 
+import java.awt.Color;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -52,7 +54,11 @@ public class UserServiceImpl implements UserService{
         
         Role userRole = roleRepository.findByRole("USER");
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
-        user.setPhoto("https://ui-avatars.com/api/?rounded=true&size=52&font-size=0.4&name=" + user.getName());
+        
+        Random rand = new Random();
+        Color rc = new Color(rand.nextFloat(), rand.nextFloat(), rand.nextFloat());
+        String hex = String.format("%02x%02x%02x", rc.getRed(), rc.getGreen(), rc.getBlue());  
+        user.setPhoto("https://ui-avatars.com/api/?rounded=true&size=512&background="+hex+"&font-size=0.4&name=" + user.getName());
         
         userRepository.save(user);
 	}

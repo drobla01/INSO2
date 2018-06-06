@@ -9,7 +9,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>4 Col Portfolio - Start Bootstrap Template</title>
+<title>Profile</title>
 
 <!-- Bootstrap core CSS -->
 <link rel="stylesheet"
@@ -41,10 +41,9 @@
 		<div class="row no-gutters px-3 py-4 shadow-bottom bg-custom mt-5">
 			<div class="col-lg-8">
 				<div class="media text-white">
-					<img class="mt-1 ml-3"
-						src="http://www.designskilz.com/random-users/images/imageM3.jpg"
-						alt="Generic placeholder image"
-						style="width: 130px; height: 130px;">
+					<img class="mt-1 ml-3 img-circle round sombra"
+						th:src="${user.photo}" alt="Generic placeholder image"
+						style="width: 130px; height: 130px; border-radius: 50%;">
 					<div class="media-body p-3">
 						<span class="font-weight-bold mt-4 mr-4 h3" th:text="${user.name}">UserName</span>
 						<small><em> <span
@@ -74,7 +73,7 @@
 				<div class="row color2 pt-1" align="center">
 					<div class="col">
 						<div class="">
-							<p th:text="${#lists.size(follows)}"></p>
+							<p th:text="${#lists.size(mentors)}"></p>
 						</div>
 					</div>
 					<div class="col">
@@ -205,10 +204,26 @@
 						</div>
 						<div class="tab-pane text-white mt-3" id="settings"
 							role="tabpanel" aria-labelledby="settings-tab">
-							<div class="row" th:if="${#lists.size(views) == 0}">
+							<div class="row" th:if="${#lists.size(mentors) == 0}">
 								<div class="col">
-									<a class="btn d-block align-middle text-white mt-5">Prueba
+									<a class="btn d-block align-middle text-white9 mt-5">Prueba
 										añadiendo algún amigo!</a>
+								</div>
+							</div>
+							<div class="row">
+								<div
+									class="col-lg-2 col-md-2 col-sm-2 col-6 portfolio-item grow"
+									th:each="mentor:${mentors}">
+									<div class="border border-0">
+										<a th:href="'social?id=' + ${mentor.id}"><img
+											class="img-circle round sombra"
+											style="width: 150px; height: 150px; border-radius: 50%;"
+											th:src="${mentor.photo}" alt=""></a>
+									</div>
+									<p class="mt-2 text-center">
+										<a class="text-white" th:href="'social?id=' + ${mentor.id}"
+											th:text="${mentor.name}"></a>
+									</p>
 								</div>
 							</div>
 						</div>

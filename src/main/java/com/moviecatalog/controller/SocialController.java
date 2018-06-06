@@ -38,7 +38,7 @@ public class SocialController {
 		model.addAttribute("favourites", user.getFavourites());
 		model.addAttribute("pending", user.getPending());
 		model.addAttribute("views", user.getViews());
-		model.addAttribute("follows", user.getFollows());	
+		model.addAttribute("mentors", user.getFollows());	
 		for (User mentor : session.getFollows()) {
 			if(mentor.getId() == user.getId()) {
 				model.addAttribute("friend", true);

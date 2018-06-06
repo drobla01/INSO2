@@ -23,7 +23,7 @@
 				<ul class="navbar-nav">
 					<li class="nav-item dropdown ml-4"><a href="#"
 						data-toggle="dropdown" class="nav-link  user-action p-1"><img
-							th:src="${user.photo}"
+							th:src="${sesion.photo}"
 							class="avatar" alt="Avatar" style="border-radius: 100%"></a>
 						<ul class="dropdown-menu dropdown-menu-right mt-2">
 							<li><a th:href="@{/user/social?id=} + ${sesion.id}"

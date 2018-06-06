@@ -18,7 +18,6 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
 
 @Entity
 @Table(name="movie")
