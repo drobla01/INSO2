@@ -44,8 +44,10 @@ public class WebController {
 	public void addAttributes(Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());
-		if(user != null)
+		if(user != null){
 			model.addAttribute("sesion", user);
+			model.addAttribute("user", user);
+		}
 	}
 
 	@RequestMapping("/user/index")

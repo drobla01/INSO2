@@ -76,9 +76,8 @@ body {
 	color: #F5F5F5;
 }
 
-.navbar img {
+.avatar {
 	border-radius: 50%;
 	width: 36px;
 	height: 36px;
-	margin-right: 10px;
 }
