@@ -81,3 +81,7 @@ body {
 	width: 36px;
 	height: 36px;
 }
+
+.sombra2 {
+	box-shadow: 0px 20px 40px 10px rgba(0, 0, 0, 0.4);
+}

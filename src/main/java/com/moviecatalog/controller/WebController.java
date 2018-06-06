@@ -122,6 +122,10 @@ public class WebController {
 		return "user/search";
 	}
 	
+	@GetMapping("user/config")
+	public String userConfig(Model model) {
+		return "user/config";
+	}
 
 	private boolean isMovieOnList(String id, Set<Movie> list) {
 		Iterator<Movie> iterator = list.iterator();
