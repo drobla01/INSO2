@@ -42,20 +42,20 @@
 			<div class="col-lg-3"></div>
 			<div class="col-lg-6  rounded sombra2 bg-custom p-5">
 				<h2>Configuración general</h2>
-				<form class="mt-4">
+				<form class="mt-4" th:action="@{/user/config}" th:object="${sesion}" method="post">
 					<div class="form-group">
 						<label for="userName">Nombre</label> <input type="text"
-							class="form-control" id="userName" required="required">
+							class="form-control" id="userName" th:field="*{name}" required="required">
 					</div>
 					<div class="form-group">
 						<label for="descripcion">Descripción</label>
-						<textarea class="form-control" id="userDescription" rows="3"
+						<textarea class="form-control" id="userDescription" rows="3" th:field="*{description}"
 							required="required"></textarea>
 					</div>
 					<div class="form-group">
 						<label for="exampleInputPassword1">Contraseña</label> <input
 							type="password" class="form-control" id="exampleInputPassword1"
-							placeholder="Contraseña" required="required">
+							placeholder="Contraseña" th:field="*{password}" required="required">
 					</div>
 
 					<div class="form-group text-center mt-4">

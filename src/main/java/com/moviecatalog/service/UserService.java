@@ -7,4 +7,5 @@ public interface UserService {
 	public User findUserByEmail(String email);
 	public User findUserById(Integer id);
 	public void update(User user);
+	public void edit(User user);
 }
