@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +62,16 @@ public class UserServiceImpl implements UserService{
         user.setPhoto("https://ui-avatars.com/api/?rounded=true&size=512&background="+hex+"&font-size=0.4&name=" + user.getName());
         
         userRepository.save(user);
+	}
+
+	@Override
+	public List<User> findAll() {
+		return userRepository.findAll();
+	}
+
+	@Override
+	public void deleteUser(User user) {
+		userRepository.delete(user);
 	}
 
 }

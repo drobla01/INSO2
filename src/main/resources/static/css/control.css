@@ -1,0 +1,13 @@
+.control-row{
+	background-color: rgb(255,255,255,0.7);
+	height: 40px;
+	
+}
+
+.borrar{
+	font-size: 18px;
+}
+
+.borrar:hover{
+	color:red;
+}

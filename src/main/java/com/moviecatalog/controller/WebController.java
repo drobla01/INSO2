@@ -211,6 +211,31 @@ public class WebController {
 		mav.addObject("id", id);
 		return mav;
 	}
+	
+	@RequestMapping("/admin/control")
+	public String panelControl(Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByEmail(auth.getName());
+		model.addAttribute("user", user);
+		
+		model.addAttribute("users", userService.findAll());
+		
+		return "admin/control";
+	}
+	
+	@GetMapping("/admin/delete")
+	public ModelAndView deleteUser(@RequestParam(name = "id", required = true) String id, Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByEmail(auth.getName());
+		
+		User deleteUser = userService.findUserById(Integer.parseInt(id));
+		userService.deleteUser(deleteUser);
+		ModelAndView mav = new ModelAndView(new RedirectView("/admin/control", true));
+		
+		return mav;
+	}
+	
+
 
 	private void removeFromList(String id, Set<Movie> list) {
 		for (Iterator<Movie> iterator = list.iterator(); iterator.hasNext();) {
