@@ -21,7 +21,6 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import com.moviecatalog.model.Role;
 
-
 @Entity // This tells Hibernate to make a table out of this class
 @Table(name="user")
 public class User {
@@ -36,6 +35,10 @@ public class User {
     private String password;
 
     private String email;
+    
+    private String description;
+    
+    private String photo;
 
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
@@ -58,6 +61,14 @@ public class User {
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "user_movie", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "movie_id"))
 	private Set<Movie> favourites;
+	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "vistas", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "movie_id"))
+	private Set<Movie> views;
+
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "pendientes", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "movie_id"))
+	private Set<Movie> pending;
     
 	public Integer getId() {
 		return id;
@@ -137,5 +148,49 @@ public class User {
 
 	public void setFavourites(Set<Movie> favourites) {
 		this.favourites = favourites;
+	}
+	
+	public void addFavourite(Movie movie) {
+		this.favourites.add(movie);
+	}
+	
+	public void addPending(Movie movie) {
+		this.pending.add(movie);
+	}
+	
+	public void addViews(Movie movie) {
+		this.views.add(movie);
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	public Set<Movie> getViews() {
+		return views;
+	}
+
+	public void setViews(Set<Movie> views) {
+		this.views = views;
+	}
+
+	public Set<Movie> getPending() {
+		return pending;
+	}
+
+	public void setPending(Set<Movie> pending) {
+		this.pending = pending;
+	}
+	
+	public void setPhoto(String path) {
+		this.photo = path;
+	}
+	
+	public String getPhoto() {
+		return this.photo;
 	}
 }

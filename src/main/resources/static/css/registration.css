@@ -1,0 +1,50 @@
+body {
+	background-color: #15212B;
+	font-family: Open Sans;
+}
+
+.formulario {
+	width: 550px;
+	border-radius: 6px;
+	background-color: #252D38;
+}
+
+.formulario-inner{
+	width:85%;
+}
+
+.formulario-group{
+}
+.sombra {
+	box-shadow: 0px 35px 40px 10px rgba(0, 0, 0, 0.3);
+}
+
+.btn-custom {
+	color:white;
+	background: none;
+	border: none
+}
+
+.btn-custom:hover {
+	cursor: pointer;
+}
+
+.margen{
+	margin-top:8%;
+	
+}
+
+a:link {
+    text-decoration: none;
+}
+
+.font-custom{
+	font-size: 2em;
+	font-family: Montserrat;
+	margin: auto;
+	text-decoration-line: none;
+}
+
+.bg-custom{
+	background-color: #3C3F63;
+}

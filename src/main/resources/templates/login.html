@@ -4,33 +4,54 @@
 	xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<title>Spring Security Tutorial</title>
-	<link rel="stylesheet" type="text/html" th:href="@{/css/login.css}" />
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<title>Inicio de sesión</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+	integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+	crossorigin="anonymous">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link
+	href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat|Raleway|Work+Sans|Source+Sans+Pro"
+	rel="stylesheet">
+<link rel="stylesheet" th:href="@{/css/login.css}" />
 </head>
 
 <body>
-	<form th:action="@{/registration}" method="get">
-		<button class="btn btn-md btn-warning btn-block" type="Submit">Go To Registration Page</button>
-	</form>	
-	
-	<div class="container">
-		<form th:action="@{/login}" method="POST" class="form-signin">
-			<h3 class="form-signin-heading" th:text="Welcome"></h3>
-			<br/>
-			 
-			<input type="text" id="email" name="email"  th:placeholder="Email"
-				class="form-control" /> <br/> 
-			<input type="password"  th:placeholder="Password"
-				id="password" name="password" class="form-control" /> <br /> 
-				
-			<div align="center" th:if="${param.error}">
-				<p style="font-size: 20; color: #FF1C19;">Email or Password invalid, please verify</p>
+
+	<nav class="navbar navbar-dark bg-custom justify-content">
+		<!-- Navbar content -->
+		<a class="text-white font-custom" href="/"><span class="" align="center">CINEBOOK</span></a>
+	</nav>
+
+	<div class="container text-white  margen" align="center">
+		<div class="formulario sombra mt-5" align="center">
+			<div class="formulario-inner p-5">
+				<form th:action="@{/login}" method="POST" class="">
+					<h3 class="form-signin-heading">Inicia sesión</h3>
+					<br /> <input type="text" id="email" name="email"
+						th:placeholder="Email" class="form-control mt-4" /> <br /> <input
+						type="password" th:placeholder="Password" id="password"
+						name="password" class="form-control" /> <br />
+
+					<div align="center" th:if="${param.error}">
+						<p style="font-size: 20; color: #FF1C19;">Email or Password
+							invalid, please verify</p>
+					</div>
+					<button class="btn btn-lg btn-primary btn-block mt-3" name="Submit"
+						type="Submit">Iniciar sesión</button>
+
+
+				</form>
+				<form th:action="@{/registration}" method="get">
+					<button class="btn-custom mt-5" type="Submit">Regístrate
+						aquí</button>
+				</form>
 			</div>
-			<button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit" th:text="Login"></button>
-		</form>
+		</div>
 	</div>
+
 </body>
 </html>

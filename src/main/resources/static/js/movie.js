@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
 	$('.launch-modal').on('click', function(e) {
 		$('.embed-responsive-item')[0].contentWindow.postMessage('{"event":"command","func":"' + 'playVideo' + '","args":""}', '*');
 		e.preventDefault();
@@ -23,5 +22,7 @@ $(document).ready(function() {
 	    }
 	}
 	
+    $("#input-comment").click(function(){
+        $("#publish-comment").show();
+    });
 });
-

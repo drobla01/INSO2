@@ -46,6 +46,12 @@ body {
 	margin-bottom: 38px;
 }
 
+.avatar {
+	border-radius: 50%;
+	width: 36px;
+	height: 36px;
+}
+
 @media ( min-width : 544px) {
 	h1 {
 		font-size: 1rem;

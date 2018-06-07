@@ -1,5 +1,10 @@
 package com.moviecatalog.service;
 
-public interface CommentService {
+import java.util.List;
 
+import com.moviecatalog.model.Comment;
+
+public interface CommentService {
+	public void saveComment(Comment comment);
+	public List<Comment> findAllComments();
 }

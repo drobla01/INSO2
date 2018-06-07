@@ -40,14 +40,13 @@ body {
 }
 
 .grow {
-		transition: all .2s ease-in-out;
+	transition: all .2s ease-in-out;
 	-webkit-transition: all .2s ease-in-out;
 	-moz-transition: all 0.5s ease;
 }
 
 @media not all and (pointer: coarse) {
 	.grow:hover {
-
 		transform: scale(1.03);
 		-webkit-transform: scale(1.03);
 		-o-transform: scale(1.03);
@@ -66,20 +65,25 @@ body {
 	left: 80%;
 	top: 60%;
 }
- 
+
+.avatar {
+	border-radius: 50%;
+	width: 36px;
+	height: 36px;
+}
+
 /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
 @media ( min-width : 768px) {
-	
 	.score {
-	font-size: 16px;
-	height: 39px;
-	width: 39px;
-	background-color: #F18A02;
-	border-radius: 50%;
-	text-align: center;
-	padding: 7px;
-	position: absolute;
-	left: 88%;
-	top: 76%;
-}
+		font-size: 16px;
+		height: 39px;
+		width: 39px;
+		background-color: #F18A02;
+		border-radius: 50%;
+		text-align: center;
+		padding: 7px;
+		position: absolute;
+		left: 88%;
+		top: 76%;
+	}
 }

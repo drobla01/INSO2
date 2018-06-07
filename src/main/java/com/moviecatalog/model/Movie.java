@@ -1,14 +1,13 @@
 package com.moviecatalog.model;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -26,17 +25,17 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Movie {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name = "movie_id")
+    @Column(name = "movie_id", nullable = false)
     private String id;
 	
 	private float vote_average;
-	
 	@Column(name = "keyy")
 	private String key;
 	private String title;
 	private String poster_path;
 	private String backdrop_path;
+	
+	@Transient
 	private String overview;
 	
 	@Transient
@@ -50,11 +49,13 @@ public class Movie {
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date release_date;
+	
+	@Transient
 	private String type;
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "movie_comment", joinColumns = @JoinColumn(name = "movie_id"), inverseJoinColumns = @JoinColumn(name = "comment_id"))
-	private Set<Comment> comments;
+	private Set<Comment> comments = new HashSet<Comment>();
 	
 	public String getId() {
 		return id;
@@ -172,6 +173,10 @@ public class Movie {
 
 	public void setComments(Set<Comment> comments) {
 		this.comments = comments;
+	}
+	
+	public void addComment(Comment comment) {
+		this.comments.add(comment);
 	}
 	
 }
