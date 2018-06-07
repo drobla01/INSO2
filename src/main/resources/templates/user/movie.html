@@ -229,7 +229,7 @@
 					data-ride="carousel" data-interval="false">
 					<div class="carousel-inner">
 						<div class="carousel-item"
-							th:each="i : ${#numbers.sequence( 1, 100/1)}"
+							th:each="i : ${#numbers.sequence( 1, 14)}"
 							th:if="${iStat.count} % 7== 0"
 							th:classappend="${i} == 7 ? active">
 							<div class="row  p-4">
