@@ -1,6 +1,7 @@
 package com.moviecatalog.service;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.moviecatalog.model.Comment;
+import com.moviecatalog.model.Movie;
 import com.moviecatalog.model.User;
 import com.moviecatalog.repository.CommentRepository;
 import com.moviecatalog.repository.UserRepository;
@@ -26,5 +28,17 @@ public class CommentServiceImpl implements CommentService{
 	@Override
 	public List<Comment> findAllComments() {
 		return commentRepository.findAll();
+	}
+
+	@Override
+	public int countComments(User author) {
+		List<Comment> allComments = commentRepository.findAll();
+		int nComments = 0;
+		for (Iterator<Comment> iterator = allComments.iterator(); iterator.hasNext();) {
+			Comment c = iterator.next();
+			if (c.getAuthor().getId().equals(author.getId()))
+				nComments++;
+		}
+		return nComments;
 	}
 }

@@ -9,7 +9,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Home</title>
+<title>Cinebook</title>
 
 <!-- Bootstrap core CSS -->
 <link rel="stylesheet"
@@ -18,8 +18,9 @@
 	crossorigin="anonymous">
 
 <!-- Custom styles for this template -->
-<link th:href="@{/css/index.css}" rel="stylesheet">
-<link th:href="@{/css/control.css}" rel="stylesheet">
+<link th:href="@{/css/movie.css}" rel="stylesheet">
+<link th:href="@{/css/modal-video.min.css}" rel="stylesheet">
+<link th:href="@{/css/comments.css}" rel="stylesheet">
 
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat|Raleway|Work+Sans"
@@ -30,39 +31,45 @@
 	integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg"
 	crossorigin="anonymous">
 
+<link th:href="@{/css/component.css}" rel="stylesheet">
 </head>
 
 <body>
 
-	<!-- Navigation-->
 	<th:block th:include="includes/navbar :: navbar"></th:block>
+	
+	<div class="container bg-custom shadow-bottom mb-5">
 
-	<!-- Page Content -->
-	<div class="container mt-3 mb-5 text-white">
-		<!-- Page Heading -->
-		<h1 class="my-4 text-white">Usuarios</h1>
-
-		<div class="row control-row-heading p-3">
-			<div class="col-lg-3 col">E-mail</div>
-			<div class="col-lg-3 col">Nombre</div>
-			<div class="col-lg-4 col">Ver comentarios</div>
-			<div class="col-lg-2 col">Eliminar</div>
-		</div>
-
-		<div class="row control-row p-3" th:each="us: ${users}">
-			<div class="col-lg-3 col"><a th:href="@{/user/social?id=} + ${us.id}"  th:text="${us.email}">mario@gmail.com</a></div>
-			<div class="col-lg-3 col" th:text="${us.name}">Mario</div>
-			<div class="col-lg-4 col"><a th:href="@{/user/comments?id=} + ${us.id}" th:text="${us.comments.size()}">2 comentarios</a></div>
-			<div class="col-lg-2 col" >
-				<a th:href="'/admin/delete?id='+${us.id}"><i
-					class="fas fa-times pl-4 borrar"></i></a>
+		<div class="row py-2">
+			<div class="col">
+				<h3 class="text-white font-weight-bold px-4 mt-3" th:text="'Comentarios de '+ ${user.email}">Comentarios</h3>
 			</div>
 		</div>
 
-	</div>
+		<div class="row px-4">
+			<div class="col pt-3">
+				<div class="comment p-4 mb-3" th:each="comment:${comments}" th:if="${comment.author.id} == ${id}">
+					<div class="row px-4">
+						<a th:href="@{/user/social?id=} + ${comment.author.id}"
+							class="p-1"><img th:src="${comment.author.photo}"
+							class="avatar" alt="Avatar"></a>
+						<div class="ml-2">
+							<span class="text-white font-weight-bold px-1"
+								th:text="${comment.author.name}">David Robles</span>
+							<p class="text-white px-1 comment-date"
+								th:text="${comment.created}">hace 20 min</p>
+						</div>
+					</div>
+					<div class="row text-white px-4 pt-2">
+						<p th:text="${comment.comment}"></p>
+						<div></div>
+					</div>
+				</div>
+			</div>
 
-	<!-- Footer -->
-	<th:block th:include="includes/footer :: footer"></th:block>
+
+		</div>
+	</div>
 
 	<!-- Bootstrap core JavaScript -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -76,6 +83,8 @@
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
 		integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
 		crossorigin="anonymous"></script>
+
+	<script type="text/javascript" th:src="@{/js/movie.js}"></script>
 
 </body>
 

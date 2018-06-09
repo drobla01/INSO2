@@ -207,6 +207,9 @@ public class WebController {
 		mappedM.addComment(comment);
 		movieService.saveMovie(mappedM);
 		
+		user.addComment(comment);
+		userService.update(user);
+		
 		ModelAndView mav = new ModelAndView(new RedirectView("/user/movie", true));
 		mav.addObject("id", id);
 		return mav;
@@ -235,6 +238,18 @@ public class WebController {
 		return mav;
 	}
 	
+	@RequestMapping("/user/comments")
+	public String viewComments(@RequestParam(name = "id", required = true) String id,Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByEmail(auth.getName());
+		model.addAttribute("user", user);
+		
+		model.addAttribute("users", userService.findAll());
+		model.addAttribute("comments", commentService.findAllComments());
+		model.addAttribute("id", id);
+		
+		return "user/comments";
+	}
 
 
 	private void removeFromList(String id, Set<Movie> list) {
