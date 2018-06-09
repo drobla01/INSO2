@@ -24,6 +24,7 @@ import com.moviecatalog.model.Comment;
 import com.moviecatalog.model.Movie;
 import com.moviecatalog.model.Results;
 import com.moviecatalog.model.User;
+import com.moviecatalog.repository.CommentRepository;
 import com.moviecatalog.service.CommentService;
 import com.moviecatalog.service.MovieService;
 import com.moviecatalog.service.UserService;
@@ -259,6 +260,45 @@ public class WebController {
 		return "user/comments";
 	}
 
+	@GetMapping("/admin/deleteComment")
+	public ModelAndView deleteComment(@RequestParam(name = "id", required = true) String id,@RequestParam(name = "movie", required = true) String movie, Model model) {
+		Comment comment = commentService.findCommentById(Integer.parseInt(id)); //x
+		User user = comment.getAuthor();
+		
+		removeCommentFromUser(id,user.getComments()); //x
+		commentService.deleteComment(comment);
+		userService.update(user); //x
+		
+		ModelAndView mav = new ModelAndView(new RedirectView("/user/movie", true));
+		mav.addObject("id", movie);
+		return mav;
+	}
+	
+	@GetMapping("/admin/deleteC2")
+	public ModelAndView deleteCommentFromPanel(@RequestParam(name = "id", required = true) String id, Model model) {
+		Comment comment = commentService.findCommentById(Integer.parseInt(id)); //x
+		User user = comment.getAuthor();
+		
+		removeCommentFromUser(id,user.getComments()); //x
+		commentService.deleteComment(comment);
+		userService.update(user); //x
+		
+		ModelAndView mav = new ModelAndView(new RedirectView("/admin/control", true));
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		user = userService.findUserByEmail(auth.getName());
+		mav.addObject("user", user);
+		
+		mav.addObject("users", userService.findAll());
+		return mav;
+	}
+	
+	private void removeCommentFromUser(String id, Set<Comment> list) {
+		for (Iterator<Comment> iterator = list.iterator(); iterator.hasNext();) {
+			Comment c = iterator.next();
+			if (Integer.toString(c.getId()).equals(id))
+				iterator.remove();
+		}
+	}
 
 	private void removeFromList(String id, Set<Movie> list) {
 		for (Iterator<Movie> iterator = list.iterator(); iterator.hasNext();) {

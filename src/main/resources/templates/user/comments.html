@@ -59,6 +59,10 @@
 							<p class="text-white px-1 comment-date"
 								th:text="${comment.created}">hace 20 min</p>
 						</div>
+						<div class="col-lg-8 col-2">
+							<a th:href="@{/admin/deleteC2?id=} + ${comment.id}" class="p-1 float-right"><i style="color: white"
+								class="fas fa-times float-right delCom"></i></a>
+						</div>
 					</div>
 					<div class="row text-white px-4 pt-2">
 						<p th:text="${comment.comment}"></p>

@@ -341,3 +341,7 @@ h1 {
 		font-size: 5rem;
 	} /*1rem = 16px*/
 }
+
+.delCom:hover{
+	color:red;
+}

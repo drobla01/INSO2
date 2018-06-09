@@ -1,18 +1,13 @@
 package com.moviecatalog.service;
 
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.moviecatalog.model.Comment;
-import com.moviecatalog.model.Movie;
 import com.moviecatalog.model.User;
 import com.moviecatalog.repository.CommentRepository;
-import com.moviecatalog.repository.UserRepository;
 
 @Service("commentService")
 public class CommentServiceImpl implements CommentService{
@@ -41,4 +36,16 @@ public class CommentServiceImpl implements CommentService{
 		}
 		return nComments;
 	}
+
+	@Override
+	public Comment findCommentById(Integer id) {
+		return commentRepository.findById(id).get();
+	}
+
+	@Override
+	public void deleteComment(Comment comment) {
+		commentRepository.delete(comment);
+	}
+
+
 }

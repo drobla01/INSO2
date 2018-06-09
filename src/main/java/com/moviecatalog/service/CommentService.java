@@ -9,4 +9,6 @@ public interface CommentService {
 	public void saveComment(Comment comment);
 	public List<Comment> findAllComments();
 	public int countComments(User author);
+	public Comment findCommentById(Integer id);
+	public void deleteComment(Comment comment);
 }

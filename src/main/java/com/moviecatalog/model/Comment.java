@@ -26,7 +26,7 @@ public class Comment {
 	
 	private String comment;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	private User author;
 	
 	@Temporal(TemporalType.TIMESTAMP)

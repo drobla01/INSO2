@@ -2,6 +2,7 @@ package com.moviecatalog.model;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -137,6 +138,15 @@ public class User {
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+	
+	public boolean isAdmin() {
+		for (Iterator<Role> iterator = this.roles.iterator(); iterator.hasNext();) {
+			Role role = iterator.next();
+			if (role.getRole().equals("ADMIN"))
+				return true;
+		}
+		return false;
 	}
 
 	public String getPassword() {
