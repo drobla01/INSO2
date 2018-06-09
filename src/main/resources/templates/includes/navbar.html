@@ -13,6 +13,8 @@
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item"><a class="nav-link"
 						th:href="@{/user/index}">Películas</a></li>
+						<li class="nav-item" th:each="rol:${user.roles}"><a class="nav-link"
+						th:href="@{/admin/control}" th:if="${rol.id} == 1">Panel de control</a></li>
 				</ul>
 				<form class="form-inline" name="f" th:action="@{/user/search}"
 					method="get">

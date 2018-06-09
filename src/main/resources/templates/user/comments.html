@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>Cinebook</title>
+
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+	integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+	crossorigin="anonymous">
+
+<!-- Custom styles for this template -->
+<link th:href="@{/css/movie.css}" rel="stylesheet">
+<link th:href="@{/css/modal-video.min.css}" rel="stylesheet">
+<link th:href="@{/css/comments.css}" rel="stylesheet">
+
+<link
+	href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat|Raleway|Work+Sans"
+	rel="stylesheet">
+
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.0.10/css/all.css"
+	integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg"
+	crossorigin="anonymous">
+
+<link th:href="@{/css/component.css}" rel="stylesheet">
+</head>
+
+<body>
+
+	<th:block th:include="includes/navbar :: navbar"></th:block>
+	
+	<div class="container bg-custom shadow-bottom mb-5">
+
+		<div class="row py-2">
+			<div class="col">
+				<h3 class="text-white font-weight-bold px-4 mt-3" th:text="'Comentarios de '+ ${user.email}">Comentarios</h3>
+			</div>
+		</div>
+
+		<div class="row px-4">
+			<div class="col pt-3">
+				<div class="comment p-4 mb-3" th:each="comment:${comments}" th:if="${comment.author.id} == ${id}">
+					<div class="row px-4">
+						<a th:href="@{/user/social?id=} + ${comment.author.id}"
+							class="p-1"><img th:src="${comment.author.photo}"
+							class="avatar" alt="Avatar"></a>
+						<div class="ml-2">
+							<span class="text-white font-weight-bold px-1"
+								th:text="${comment.author.name}">David Robles</span>
+							<p class="text-white px-1 comment-date"
+								th:text="${comment.created}">hace 20 min</p>
+						</div>
+					</div>
+					<div class="row text-white px-4 pt-2">
+						<p th:text="${comment.comment}"></p>
+						<div></div>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+
+	<!-- Bootstrap core JavaScript -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+		integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+		integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+		crossorigin="anonymous"></script>
+
+	<script type="text/javascript" th:src="@{/js/movie.js}"></script>
+
+</body>
+
+</html>

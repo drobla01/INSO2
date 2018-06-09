@@ -1,6 +1,7 @@
 package com.moviecatalog.model;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -69,7 +70,19 @@ public class User {
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "pendientes", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "movie_id"))
 	private Set<Movie> pending;
+	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "user_comment", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "comment_id"))
+	private Set<Comment> comments = new HashSet<Comment>();
     
+	public Set<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(Set<Comment> comments) {
+		this.comments = comments;
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -192,5 +205,9 @@ public class User {
 	
 	public String getPhoto() {
 		return this.photo;
+	}
+	
+	public void addComment(Comment comentario) {
+		this.comments.add(comentario);
 	}
 }

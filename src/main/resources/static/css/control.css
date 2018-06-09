@@ -1,0 +1,23 @@
+body{
+	background-color: #1B2431;
+}
+
+.control-row {
+	background-color: #273142;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-bottom-color: #363F4E;
+}
+
+.control-row-heading {
+	background-color: #313D4F;
+	border-radius: 6px 6px 0 0;
+}
+
+.borrar {
+	font-size: 18px;
+}
+
+.borrar:hover {
+	color: red;
+}
