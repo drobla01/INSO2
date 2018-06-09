@@ -38,25 +38,28 @@
 	<th:block th:include="includes/navbar :: navbar"></th:block>
 
 	<!-- Page Content -->
-	<div class="container">
+	<div class="container mt-3 mb-5 text-white">
 		<!-- Page Heading -->
 		<h1 class="my-4 text-white">Usuarios</h1>
-		
-		
-		<div class="row control-row pt-2">
-		  <div class="col">E-mail</div>
-		  <div class="col">Nombre</div>
-		  <div class="col">Fecha alta</div>
-		  <div class="col">Eliminar</div>
-		</div>
-		
-		<div class="row mt-2 control-row pt-2" th:each="us: ${users}">
-		  <div class="col" th:text="${us.email}">mario@gmail.com</div>
-		  <div class="col" th:text="${us.name}">Mario</div>
-		  <div class="col" th:text="${us.creation}">06-06-2018</div>
-		  <div class="col"><a th:href="'/admin/delete?id='+${us.id}"><i class="fas fa-times pl-4 borrar"></i></a></div>
+
+		<div class="row control-row-heading p-3">
+			<div class="col-lg-3 col">E-mail</div>
+			<div class="col-lg-3 col">Nombre</div>
+			<div class="col-lg-4 col">Fecha alta</div>
+			<div class="col-lg-2 col">Eliminar</div>
 		</div>
 
+		<div class="row control-row p-3" th:each="us: ${users}">
+			<div class="col-lg-3 col" th:text="${us.email}">mario@gmail.com</div>
+			<div class="col-lg-3 col" th:text="${us.name}">Mario</div>
+			<div class="col-lg-4 col" th:text="${us.creation}">06-06-2018</div>
+			<div class="col-lg-2 col" >
+				<a th:href="'/admin/delete?id='+${us.id}"><i
+					class="fas fa-times pl-4 borrar"></i></a>
+			</div>
+		</div>
+
+	</div>
 
 	<!-- Footer -->
 	<th:block th:include="includes/footer :: footer"></th:block>
