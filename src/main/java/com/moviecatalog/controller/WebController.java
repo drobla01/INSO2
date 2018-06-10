@@ -24,7 +24,6 @@ import com.moviecatalog.model.Comment;
 import com.moviecatalog.model.Movie;
 import com.moviecatalog.model.Results;
 import com.moviecatalog.model.User;
-import com.moviecatalog.repository.CommentRepository;
 import com.moviecatalog.service.CommentService;
 import com.moviecatalog.service.MovieService;
 import com.moviecatalog.service.UserService;
@@ -237,9 +236,6 @@ public class WebController {
 	
 	@GetMapping("/admin/delete")
 	public ModelAndView deleteUser(@RequestParam(name = "id", required = true) String id, Model model) {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		User user = userService.findUserByEmail(auth.getName());
-		
 		User deleteUser = userService.findUserById(Integer.parseInt(id));
 		userService.deleteUser(deleteUser);
 		ModelAndView mav = new ModelAndView(new RedirectView("/admin/control", true));
