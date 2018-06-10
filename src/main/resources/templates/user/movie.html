@@ -116,18 +116,18 @@
 
 	<div class="container bg-custom shadow-bottom mt-3">
 		<div class="row p-3 bg-custom2">
-			<div class="col-lg-2" style="color: #00C1C9">
+			<div class="col-lg-2 p-2" style="color: #00C1C9">
 				<i class="far fa-clock pr-1"></i> <span class="text-white"
 					th:text="${movie.runtime}"></span><span class="text-white">
 					min</span>
 			</div>
-			<div class="col-lg-8">
+			<div class="col-lg-8 p-2">
 				<span th:each="genre:${movie.genres}"> <a
 					th:href="@{/user/genre?id=} + ${genre.id} +@{&name=} + ${genre.name}"
-					class="badge badge-light badge-custom mr-2" th:text="${genre.name}">Light</a>
+					class="badge badge-light badge-custom mr-2 mb-2" th:text="${genre.name}">Light</a>
 				</span>
 			</div>
-			<div class="col-lg-2 ">
+			<div class="col-lg-2 p-2">
 				<i class="fas fa-star fa-sm pr-1" style="color: #00C1C9"></i> <span
 					class="score-bg" th:text="${movie.vote_average}"></span>
 
